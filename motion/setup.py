@@ -4,7 +4,7 @@ package_name = 'motion'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.1.0',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -13,10 +13,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='sondre',
-    maintainer_email='Datskalf@outlook.com',
+    maintainer='Sondre Flakstad',
+    maintainer_email='som38@aber.ac.uk',
     description='TODO: Package description',
-    license='TODO: License declaration',
+    license='Apache license 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
