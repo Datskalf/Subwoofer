@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'Servos = som38_ros360_py.servo_control:main',
         ],
     },
 )
