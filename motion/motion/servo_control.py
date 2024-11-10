@@ -4,6 +4,7 @@ from rclpy.node import Node
 class ServoControl(Node):
     def __init__(self):
         super().__init__("servo_control")
+        self.get_logger().info(f"Servo control online!")
 
 
 
