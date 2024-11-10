@@ -9,7 +9,7 @@ class ServoControl(Node):
 
 
 def main(args=None):
-    rclpy.init(args)
+    rclpy.init(args=args)
     node = ServoControl()
     rclpy.spin(node)
     node.destroy_node()
