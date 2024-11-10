@@ -6,6 +6,8 @@ class ServoControl(Node):
         super().__init__("servo_control")
         self.get_logger().info(f"Servo control online!")
 
+        
+
 
 
 def main(args=None):
