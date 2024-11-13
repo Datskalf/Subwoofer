@@ -10,8 +10,11 @@ class MPUMeasure(Node):
     def __init__(self):
         super().__init__("mpu_measure")
 
-        self.i2c = board.I2C()
-        self.mpu = MPU6050(self.i2c)
+        try:
+            self.i2c = board.I2C()
+            self.mpu = MPU6050(self.i2c)
+        except:
+            return
 
         self.timer = self.create_timer(
             0.1,
@@ -20,7 +23,7 @@ class MPUMeasure(Node):
 
         self.mpu_publisher = self.create_publisher(
             MPU,
-            "/subwoofer/sensors/mpu_0",
+            "/subwoofer/sensors/imu_0",
             10
         )
 

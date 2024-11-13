@@ -33,6 +33,32 @@ class Leg():
         else:
             raise IndexError
         
+    def _set_center(self, servo_index: int, center: float) -> bool:
+        """
+        Sets the center value for a given server.
+        Returns whether the setting was successful.
+        """
+        if center < 0 or center >= self._get_servo(servo_index).actuation_range:
+            return False
+        
+        match servo_index:
+            case 0:
+                self.hip_center = center
+                return True
+            case 1:
+                self.upper_center = center
+                return True
+            case 2:
+                self.lower_center = center
+                return True
+            case _:
+                raise IndexError
+            
+    def _set_all_centers(self, hip_center: float, upper_center: float, lower_center: float) -> None:
+        self._set_center(0, hip_center)
+        self._set_center(1, upper_center)
+        self._set_center(2, lower_center)
+
     def _get_center(self, servo_index: int) -> float:
         """
         Fetches the center angle for a given servo.

@@ -7,28 +7,33 @@ from std_msgs.msg import Float32
 from adafruit_servokit import ServoKit, Servo
 
 from .modules.Leg import Leg
+from .modules.LegsKit import LegsKit
 
 class ServoControl(Node):
     kit: ServoKit | None = None
-    legs: list[Leg] | None = None
+    legs: dict[str: Leg] | None = None
 
     def __init__(self):
         super().__init__("servo_control")
 
         self.valid_servo_indices = [0,1,2,3,4,5,6,7,12,13,14,15]
+        values = [70,132,130,78,105,140,110,90,179,100,110,48]
 
         try:
             self.kit = ServoKit(channels=16)
         except ValueError as ex:
             self.get_logger().error(f"{ex}")
+            return
             ...
 
-        self.legs = {
-            "fl": Leg(self.kit.servo[5], self.kit.servo[2], self.kit.servo[0]),
-            "fr": Leg(self.kit.servo[4], self.kit.servo[3], self.kit.servo[1]),
-            "bl": Leg(self.kit.servo[7], self.kit.servo[13], self.kit.servo[15]),
-            "br": Leg(self.kit.servo[8], self.kit.servo[12], self.kit.servo[14])
-        }
+        self.legs = LegsKit([
+            [5, 2, 0],
+            [4, 3, 1],
+            [7, 13, 15],
+            [6, 12, 14]
+        ])
+
+
 
 
         self.servo_individual_control = self.create_subscription(
