@@ -4,10 +4,14 @@ from rclpy.node import Node
 from interfaces.msg import ServoAngle
 from std_msgs.msg import Float32
 
-from adafruit_servokit import ServoKit
+from adafruit_servokit import ServoKit, Servo
+
+from .modules.Leg import Leg
 
 class ServoControl(Node):
     kit: ServoKit | None = None
+    legs: list[Leg] | None = None
+
     def __init__(self):
         super().__init__("servo_control")
 
@@ -18,6 +22,13 @@ class ServoControl(Node):
         except ValueError as ex:
             self.get_logger().error(f"{ex}")
             ...
+
+        self.legs = {
+            "fl": Leg(self.kit.servo[5], self.kit.servo[2], self.kit.servo[0]),
+            "fr": Leg(self.kit.servo[4], self.kit.servo[3], self.kit.servo[1]),
+            "bl": Leg(self.kit.servo[7], self.kit.servo[13], self.kit.servo[15]),
+            "br": Leg(self.kit.servo[8], self.kit.servo[12], self.kit.servo[14])
+        }
 
 
         self.servo_individual_control = self.create_subscription(
