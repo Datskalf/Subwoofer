@@ -3,11 +3,13 @@ import os
 from glob import glob
 
 package_name = 'motion'
+modules = 'motion/modules'
 
 setup(
     name=package_name,
-    version='0.1.0',
-    packages=find_packages(exclude=['test']),
+    version='0.0.0',
+    packages=[package_name, modules],
+    #packages=find_packages(exclude=['test']),
     data_files=[
         (
             'share/ament_index/resource_index/packages',
