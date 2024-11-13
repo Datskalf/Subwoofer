@@ -10,7 +10,6 @@ class ServoControl(Node):
     kit: ServoKit | None = None
     def __init__(self):
         super().__init__("servo_control")
-        self.get_logger().info(f"Servo control online!")
 
         self.valid_servo_indices = [0,1,2,3,4,5,6,7,12,13,14,15]
 
@@ -32,6 +31,13 @@ class ServoControl(Node):
             Float32,
             "/subwoofer/servos/servo_joint_update",
             self.servo_update_all,
+            10
+        )
+
+        self.set_standing = self.create_subscription(
+            Float32,
+            "/subwoofer/servos/standing_height",
+            self.set_standing,
             10
         )
 
@@ -63,6 +69,22 @@ class ServoControl(Node):
             if msg.data not in range(servo.actuation_range):
                 continue
             servo.angle = msg.data
+
+    def set_standing(self, msg: Float32):
+        return
+        values = [70,132,130,78,105,140,110,90,179,100,110,48]
+        self.get_logger().info(f"Moving servos to standing with offset {msg.data}")
+        for i, index in enumerate(self.valid_servo_indices):
+            angle = values[i]
+            try:
+                if i in [5,4,7,6]:
+                    self.kit.servo[index].angle = msg.data
+                elif i in [2,1,13,12]:
+                    self.kit.servo[index].angle = msg.data + angle
+                else:
+                    self.kit.servo[index].angle = msg.data - angle
+            except ValueError as ex:
+                pass
 
 
 
