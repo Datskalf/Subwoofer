@@ -28,7 +28,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'Servos = motion.servo_control:main',
+            'servo_control = motion.servo_control:main',
         ],
     },
 )
