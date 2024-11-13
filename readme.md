@@ -10,18 +10,18 @@ Software is currently ran on a raspberry pi running ROS2 Humble. Login for this 
 
 | Leg         | Joint | ID | Standing |
 | ----------- | ----- | -- | :------: |
-| Front Left  | Hip   | 05 | xxx      |
-| Front Left  | Upper | 02 | xxx      |
-| Front Left  | Lower | 00 | xxx      |
-| Front Right | Hip   | 04 | xxx      |
-| Front Right | Upper | 03 | xxx      |
-| Front Right | Lower | 01 | xxx      |
-| Back Left   | Hip   | 07 | xxx      |
-| Back Left   | Upper | 13 | xxx      |
-| Back Left   | Lower | 15 | xxx      |
-| Back Right  | Hip   | 08 | xxx      |
-| Back Right  | Upper | 12 | xxx      |
-| Back Right  | Lower | 14 | xxx      |
+| Front Left  | Hip   | 05 | 140      |
+| Front Left  | Upper | 02 | 130      |
+| Front Left  | Lower | 00 | 070      |
+| Front Right | Hip   | 04 | 105      |
+| Front Right | Upper | 03 | 078      |
+| Front Right | Lower | 01 | 132      |
+| Back Left   | Hip   | 07 | 090      |
+| Back Left   | Upper | 13 | 100      |
+| Back Left   | Lower | 15 | 048      |
+| Back Right  | Hip   | 06 | 110      |
+| Back Right  | Upper | 12 | 179      |
+| Back Right  | Lower | 14 | 110      |
 
 
 
