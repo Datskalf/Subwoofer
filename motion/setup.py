@@ -29,6 +29,7 @@ setup(
     entry_points={
         'console_scripts': [
             'servo_control = motion.servo_control:main',
+            'mpu_measure = motion.mpu_measure:main',
         ],
     },
 )
