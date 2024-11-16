@@ -8,10 +8,12 @@ class Leg():
     upper_center: float = None
     lower_center: float = None
 
-    def __init__(self, servo_hip: Servo, servo_upper: Servo, servo_lower: Servo):
+    def __init__(self, servo_hip: Servo, servo_upper: Servo, servo_lower: Servo, flip_height: bool = False):
         self.servo_hip = servo_hip
         self.servo_upper = servo_upper
         self.servo_lower = servo_lower
+
+        self.flip_height = flip_height
 
 
 
@@ -54,10 +56,10 @@ class Leg():
             case _:
                 raise IndexError
             
-    def _set_all_centers(self, hip_center: float, upper_center: float, lower_center: float) -> None:
-        self._set_center(0, hip_center)
-        self._set_center(1, upper_center)
-        self._set_center(2, lower_center)
+    def _set_all_centers(self, center_values: list[float]) -> None:
+        self._set_center(0, center_values[0])
+        self._set_center(1, center_values[1])
+        self._set_center(2, center_values[2])
 
     def _get_center(self, servo_index: int) -> float:
         """
@@ -88,6 +90,9 @@ class Leg():
         :raises IndexError: If servo index is out of bounds.
         """
         servo: Servo = self._get_servo(servo_index)
+
+        if relative:
+            angle = angle + self._get_center(servo_index)
         
         if angle < 0:
             servo.angle = 0
@@ -105,7 +110,11 @@ class Leg():
         :param float angle: Angle to set the servos to.
         """
         for i in range(3):
-            self.set_servo_abs(i, angle)
+            self.set_servo(i, angle, False)
+
+    def set_all_rel(self, angle: float) -> None:
+        for i in range(3):
+            self.set_servo(i, angle, True)
         
     def center_servo(self, servo_index: int) -> None:
         """
@@ -114,12 +123,14 @@ class Leg():
 
         :param int servo_index: Index of the servo in range [0,2].
         """
-        servo: Servo = self._get_servo(servo_index)
         center = self._get_center(servo_index)
         if center is None:
             return
-        self.set_servo(servo, center)
+        self.set_servo(servo_index, center)
 
-    def center_all(self) -> None:
-        for i in range (3):
-            self.center_servo(i)
+    def center_all(self, offset: float) -> None:
+        self.set_servo(0, 0.0, True)
+        if self.flip_height:
+            offset *= -1
+        self.set_servo(1, offset, True)
+        self.set_servo(2, -2*offset, True)

@@ -92,20 +92,8 @@ class ServoControl(Node):
             servo.angle = msg.data
 
     def set_standing(self, msg: Float32):
-        return
-        values = [70,132,130,78,105,140,110,90,179,100,110,48]
-        self.get_logger().info(f"Moving servos to standing with offset {msg.data}")
-        for i, index in enumerate(self.valid_servo_indices):
-            angle = values[i]
-            try:
-                if i in [5,4,7,6]:
-                    self.kit.servo[index].angle = msg.data
-                elif i in [2,1,13,12]:
-                    self.kit.servo[index].angle = msg.data + angle
-                else:
-                    self.kit.servo[index].angle = msg.data - angle
-            except ValueError as ex:
-                pass
+        self.get_logger().info(f"Moving servos to standing")
+        self.legs.stand(msg.data)
 
 
 

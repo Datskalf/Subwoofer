@@ -19,7 +19,8 @@ class LegsKit():
         self.front_right = Leg(
             self.kit.servo[servo_addresses[1][0]],
             self.kit.servo[servo_addresses[1][1]],
-            self.kit.servo[servo_addresses[1][2]]
+            self.kit.servo[servo_addresses[1][2]],
+            True
         )
         self.back_left = Leg(
             self.kit.servo[servo_addresses[2][0]],
@@ -29,7 +30,8 @@ class LegsKit():
         self.back_right = Leg(
             self.kit.servo[servo_addresses[3][0]],
             self.kit.servo[servo_addresses[3][1]],
-            self.kit.servo[servo_addresses[3][2]]
+            self.kit.servo[servo_addresses[3][2]],
+            True
         )
 
         if center_values is not None:
@@ -37,3 +39,7 @@ class LegsKit():
             self.front_right._set_all_centers(center_values[1])
             self.back_left._set_all_centers(center_values[2])
             self.back_right._set_all_centers(center_values[3])
+
+    def stand(self, height = 0.0):
+        for leg in [self.front_left, self.front_right, self.back_left, self.back_right]:
+            leg.center_all(height)
