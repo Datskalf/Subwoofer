@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 
 from interfaces.msg import ServoAngle
+from interfaces.msg import LegPose
 from std_msgs.msg import Float32
 
 from adafruit_servokit import ServoKit, Servo
@@ -62,6 +63,19 @@ class ServoControl(Node):
             10
         )
 
+        self.servo_angle_pub = self.create_publisher(
+            LegPose,
+            "/subwoofer/servos/current_angle",
+            10
+        )
+
+        self.servo_angle_timer = self.create_timer(
+            0.5,
+            self.output_servo_values
+        )
+
+
+
         self.get_logger().info(f"Servo controller online!")
 
 
@@ -78,6 +92,28 @@ class ServoControl(Node):
             return
         
         servo.angle = msg.angle
+
+    def output_servo_values(self):
+        msg = LegPose()
+        
+        msg.front_left_hip = self.legs.front_left.servo_hip.angle
+        msg.front_left_upper = self.legs.front_left.servo_upper.angle
+        msg.front_left_lower = self.legs.front_left.servo_lower.angle
+        
+        msg.front_right_hip = self.legs.front_right.servo_hip.angle
+        msg.front_right_upper = self.legs.front_right.servo_upper.angle
+        msg.front_right_lower = self.legs.front_right.servo_lower.angle
+
+        msg.back_left_hip = self.legs.back_left.servo_hip.angle
+        msg.back_left_upper = self.legs.back_left.servo_upper.angle
+        msg.back_left_lower = self.legs.back_left.servo_lower.angle
+        
+        msg.back_right_hip = self.legs.back_right.servo_hip.angle
+        msg.back_right_upper = self.legs.back_right.servo_upper.angle
+        msg.back_right_lower = self.legs.back_right.servo_lower.angle
+
+        self.servo_angle_pub.publish(msg)
+        
 
     def servo_update_all(self, msg: Float32):
         if self.kit is None:

@@ -16,6 +16,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces (${PROJECT_NAME}
   "msg/ServoAngle.msg"
+  "msg/LegPose.msg"
   "msg/MPU.msg"
   DEPENDENCIES geometry_msgs
 )
