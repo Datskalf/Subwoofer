@@ -6,6 +6,11 @@ The version made has been given the name `spotmicro`, and the original designs c
 Software is currently ran on a raspberry pi running ROS2 Humble. Login for this pi is (username: `ubuntu`, password: `rootroot`).
 
 
+## Setup
+When using the face detection, please copy the `ros2_ws/src/sensing/sensing/haarcascade_frontalface_default.xml` file to `ros2_ws/install/sensing/lib/python3.10/site-packages/sensing/haarcascade_frontalface_default.xml`.
+This is a workaround until a fix has been found.
+
+
 ## Servos
 
 | Leg         | Joint | ID | Standing |
