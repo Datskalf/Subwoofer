@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "CameraFeed = sensing.camera_feed:main"
+            "FaceDetection = sensing.face_detection:main",
         ],
     },
 )
