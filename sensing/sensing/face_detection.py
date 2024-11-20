@@ -12,9 +12,15 @@ import os
 import pathlib
 
 class FaceDetection(Node):
+    last_image = None
     #CASCADE_PATH: str = "/home/sondre/subwoofer/src/sensing/sensing/haarcascade_frontalface_default.xml"
+    #CASCADE_PATH: str = os.path.join(
+    #    pathlib.Path(__file__).parent.absolute(),
+    #    "haarcascade_frontalface_default.xml"
+    #)
     CASCADE_PATH: str = os.path.join(
-        pathlib.Path(__file__).parent.absolute(),
+        os.environ["SW_PATH"],
+        "static",
         "haarcascade_frontalface_default.xml"
     )
 
@@ -34,7 +40,13 @@ class FaceDetection(Node):
 
         self.face_detect_pub = self.create_publisher(
             FacePoints,
-            "subwoofer/face_detector",
+            "/subwoofer/face_detector/points",
+            10
+        )
+
+        self.face_box_pub = self.create_publisher(
+            CompressedImage,
+            "/subwoofer/face_detector/compressed",
             10
         )
 
@@ -44,6 +56,7 @@ class FaceDetection(Node):
     def detect_face(self, msg) -> None:
         #self.get_logger().info(f"Running face detection")
         img = self.bridge.compressed_imgmsg_to_cv2(msg)
+        self.last_image = img
         rects = self.cascade.detectMultiScale(
             img,
             scaleFactor=1.3,
@@ -52,21 +65,29 @@ class FaceDetection(Node):
             flags=cv2.CASCADE_SCALE_IMAGE
         )
 
-        if len(rects) == 0:
-            return
-        
-        self.get_logger().info(f"{rects[0]}")
+        if len(rects) > 0:
+            rects[:,2:] += rects[:,:2]
+            msg1 = FacePoints()
 
-        msg = FacePoints()
-        for rect in rects:
-            r = FacePoint()
-            r.x = int(rect[0])
-            r.y = int(rect[1])
-            r.width = int(rect[2])
-            r.height = int(rect[3])
-            msg.points.append(r)
-        self.face_detect_pub.publish(msg)
-        ...
+            for x1, y1, x2, y2 in rects:
+                r = FacePoint()
+                r.x = int(abs((x2-x1)//2))
+                r.y = int(abs((y2-y1)//2))
+                r.width = int(abs(x2-x1))
+                r.height = int(abs(y2-y1))
+                msg1.points.append(r)
+            
+            self.face_detect_pub.publish(msg1)
+            self.draw_boxes(img, rects, (0,255,0))
+
+        msg2 = self.bridge.cv2_to_compressed_imgmsg(img)
+        self.face_box_pub.publish(msg2)
+
+
+
+    def draw_boxes(self, image, boxes: list[int], colour: tuple[int]) -> None:
+        for x1, y1, x2, y2 in boxes:
+            cv2.rectangle(image, (x1, y1), (x2, y2), colour, 2)
 
 
 
