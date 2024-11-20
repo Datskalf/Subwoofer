@@ -96,21 +96,21 @@ class ServoControl(Node):
     def output_servo_values(self):
         msg = LegPose()
         
-        msg.front_left_hip = self.legs.front_left.servo_hip.angle
-        msg.front_left_upper = self.legs.front_left.servo_upper.angle
-        msg.front_left_lower = self.legs.front_left.servo_lower.angle
+        msg.front_left_hip = float(self.legs.front_left.servo_hip.angle)
+        msg.front_left_upper = float(self.legs.front_left.servo_upper.angle)
+        msg.front_left_lower = float(self.legs.front_left.servo_lower.angle)
         
-        msg.front_right_hip = self.legs.front_right.servo_hip.angle
-        msg.front_right_upper = self.legs.front_right.servo_upper.angle
-        msg.front_right_lower = self.legs.front_right.servo_lower.angle
+        msg.front_right_hip = float(self.legs.front_right.servo_hip.angle)
+        msg.front_right_upper = float(self.legs.front_right.servo_upper.angle)
+        msg.front_right_lower = float(self.legs.front_right.servo_lower.angle)
 
-        msg.back_left_hip = self.legs.back_left.servo_hip.angle
-        msg.back_left_upper = self.legs.back_left.servo_upper.angle
-        msg.back_left_lower = self.legs.back_left.servo_lower.angle
+        msg.back_left_hip = float(self.legs.back_left.servo_hip.angle)
+        msg.back_left_upper = float(self.legs.back_left.servo_upper.angle)
+        msg.back_left_lower = float(self.legs.back_left.servo_lower.angle)
         
-        msg.back_right_hip = self.legs.back_right.servo_hip.angle
-        msg.back_right_upper = self.legs.back_right.servo_upper.angle
-        msg.back_right_lower = self.legs.back_right.servo_lower.angle
+        msg.back_right_hip = float(self.legs.back_right.servo_hip.angle)
+        msg.back_right_upper = float(self.legs.back_right.servo_upper.angle)
+        msg.back_right_lower = float(self.legs.back_right.servo_lower.angle)
 
         self.servo_angle_pub.publish(msg)
         
