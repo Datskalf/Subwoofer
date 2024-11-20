@@ -8,6 +8,7 @@ class Servo():
         self.min_duty_cycle = 2000
         self.max_duty_cycle = 10000
         self.duty_cycle_per_degree: float = 44.4444
+        self.duty_cycle_at_0 = 2000
         self.current_angle = None
         self.is_flipped = is_flipped
         self.default_angle = 90
@@ -36,6 +37,9 @@ class Servo():
             self.default_angle = self.max_angle
             return
         self.default_angle = angle
+
+    def set_current_as_0(self):
+        ...
 
     def move_to(self, angle: int):
         self.set_angle(angle)

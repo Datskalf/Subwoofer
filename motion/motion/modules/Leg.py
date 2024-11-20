@@ -73,3 +73,9 @@ class Leg():
         """
         servo = self._get_servo(servo_index)
         servo.move_to(servo.default_angle)
+
+
+    def set_stand(self, height):
+        self.servo_hip.move_to(0)
+        self.servo_upper.move_to(self.servo_upper.default_angle + height)
+        self.servo_lower.move_to(self.servo_lower.default_angle + height*2)

@@ -48,4 +48,5 @@ class LegsKit():
         self.back_right = Leg(Servo(6), Servo(12, True), Servo(14, True))
 
     def stand(self, height = 0.0):
-        ...
+        for leg in [self.front_left, self.front_right, self.back_left, self.back_right]:
+            leg.set_stand(height)
