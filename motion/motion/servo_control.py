@@ -69,13 +69,6 @@ class ServoControl(Node):
             10
         )
 
-        self.servo_angle_timer = self.create_timer(
-            0.5,
-            self.output_servo_values
-        )
-
-
-
         self.get_logger().info(f"Servo controller online!")
 
 

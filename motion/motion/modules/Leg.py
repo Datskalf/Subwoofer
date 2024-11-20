@@ -1,20 +1,18 @@
-from adafruit_servokit import Servo
+from .Servo import Servo
 
 class Leg():
     servo_hip: Servo
     servo_upper: Servo
     servo_lower: Servo
-    hip_center: float = None
-    upper_center: float = None
-    lower_center: float = None
 
-    def __init__(self, servo_hip: Servo, servo_upper: Servo, servo_lower: Servo, flip_height: bool = False):
+    def __init__(self, servo_hip: Servo, servo_upper: Servo, servo_lower: Servo):
         self.servo_hip = servo_hip
         self.servo_upper = servo_upper
         self.servo_lower = servo_lower
 
-        self.flip_height = flip_height
-
+        self.servo_hip.default_angle = 0
+        self.servo_upper.default_angle = 145
+        self.servo_lower.default_angle = 145
 
 
     def _get_servo(self, servo_index: int) -> Servo:
@@ -35,49 +33,6 @@ class Leg():
         else:
             raise IndexError
         
-    def _set_center(self, servo_index: int, center: float) -> bool:
-        """
-        Sets the center value for a given server.
-        Returns whether the setting was successful.
-        """
-        if center < 0 or center >= self._get_servo(servo_index).actuation_range:
-            return False
-        
-        match servo_index:
-            case 0:
-                self.hip_center = center
-                return True
-            case 1:
-                self.upper_center = center
-                return True
-            case 2:
-                self.lower_center = center
-                return True
-            case _:
-                raise IndexError
-            
-    def _set_all_centers(self, center_values: list[float]) -> None:
-        self._set_center(0, center_values[0])
-        self._set_center(1, center_values[1])
-        self._set_center(2, center_values[2])
-
-    def _get_center(self, servo_index: int) -> float:
-        """
-        Fetches the center angle for a given servo.
-        If servo index is out of bounds, raises an IndexError.
-
-        :param int servo_index: Index of the servo in range [0,2].
-        :raises IndexError: If servo index is out of bounds
-        """
-        if servo_index == 0:
-            return self.hip_center
-        elif servo_index == 1:
-            return self.upper_center
-        elif servo_index == 2:
-            return self.lower_center
-        else:
-            raise IndexError
-        
     def set_servo(self, servo_index: int, angle: float, relative: bool = False) -> None:
         """
         Sets a specified servo to a given angle.
@@ -92,16 +47,9 @@ class Leg():
         servo: Servo = self._get_servo(servo_index)
 
         if relative:
-            angle = angle + self._get_center(servo_index)
-        
-        if angle < 0:
-            servo.angle = 0
-            return
-        if angle >= servo.actuation_range:
-            servo.angle = servo.actuation_range - 1
-            return
-        
-        servo.angle = angle
+            servo.move_by(angle)
+        else:
+            servo.move_to(angle)
 
     def set_all_abs(self, angle: float) -> None:
         """
@@ -123,14 +71,5 @@ class Leg():
 
         :param int servo_index: Index of the servo in range [0,2].
         """
-        center = self._get_center(servo_index)
-        if center is None:
-            return
-        self.set_servo(servo_index, center)
-
-    def center_all(self, offset: float) -> None:
-        self.set_servo(0, 0.0, True)
-        if self.flip_height:
-            offset *= -1
-        self.set_servo(1, offset, True)
-        self.set_servo(2, -2*offset, True)
+        servo = self._get_servo(servo_index)
+        servo.move_to(servo.default_angle)

@@ -1,6 +1,7 @@
 from .Leg import Leg
 
-from adafruit_servokit import ServoKit, Servo
+from adafruit_servokit import ServoKit
+from Servo import Servo
 
 class LegsKit():
     front_left: Leg = None
@@ -40,6 +41,11 @@ class LegsKit():
             self.back_left._set_all_centers(center_values[2])
             self.back_right._set_all_centers(center_values[3])
 
+    def __init__(self):
+        self.front_left = Leg(Servo(5), Servo(2), Servo(0))
+        self.front_right = Leg(Servo(4), Servo(3, True), Servo(1, True))
+        self.back_left = Leg(Servo(7), Servo(13), Servo(15))
+        self.back_right = Leg(Servo(6), Servo(12, True), Servo(14, True))
+
     def stand(self, height = 0.0):
-        for leg in [self.front_left, self.front_right, self.back_left, self.back_right]:
-            leg.center_all(height)
+        ...
