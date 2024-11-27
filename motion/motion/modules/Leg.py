@@ -1,3 +1,7 @@
+"""
+TODO
+"""
+
 from .Servo import Servo
 
 class Leg():
@@ -59,8 +63,11 @@ class Leg():
         :raises IndexError: If servo index is out of bounds.
         """
 
-        servo: Servo = self._get_servo(servo_index)
-
+        try:
+            servo: Servo = self._get_servo(servo_index)
+        except IndexError:
+            return
+        
         if relative:
             servo.move_by(angle)
         else:

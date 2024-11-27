@@ -1,3 +1,7 @@
+"""
+TODO
+"""
+
 import rclpy
 from rclpy.node import Node
 
@@ -12,6 +16,10 @@ class MPUMeasure(Node):
     """
     
     def __init__(self):
+        """
+        TODO
+        """
+        
         super().__init__("mpu_measure")
 
         try:
@@ -33,6 +41,10 @@ class MPUMeasure(Node):
 
 
     def mpu_publish(self):
+        """
+        TODO
+        """
+        
         msg = MPU()
         msg.acceleration.x, msg.acceleration.y, msg.acceleration.z = self.mpu.acceleration
         msg.gyro.x, msg.gyro.y, msg.gyro.z = self.mpu.gyro
