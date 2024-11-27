@@ -7,6 +7,10 @@ from adafruit_mpu6050 import MPU6050
 from interfaces.msg import MPU
 
 class MPUMeasure(Node):
+    """
+    TODO
+    """
+    
     def __init__(self):
         super().__init__("mpu_measure")
 
