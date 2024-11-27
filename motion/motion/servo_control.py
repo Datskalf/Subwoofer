@@ -1,7 +1,12 @@
+"""
+TODO
+"""
+
 import rclpy
 from rclpy.node import Node
 
 from interfaces.msg import ServoAngle
+from interfaces.msg import ServoAngleNew
 from interfaces.msg import LegPose
 from std_msgs.msg import Float32
 
@@ -11,10 +16,18 @@ from .modules.Leg import Leg
 from .modules.LegsKit import LegsKit
 
 class ServoControl(Node):
+    """
+    TODO
+    """
+    
     kit: ServoKit | None = None
-    legs: dict[str: Leg] | None = None
+    legs: LegsKit | None = None
 
     def __init__(self):
+        """
+        TODO
+        """
+        
         super().__init__("servo_control")
 
         self.valid_servo_indices = [0,1,2,3,4,5,6,7,12,13,14,15]
@@ -27,23 +40,25 @@ class ServoControl(Node):
             return
             ...
 
-        self.legs = LegsKit([
-                [ 5,  2,  0],
-                [ 4,  3,  1],
-                [ 7, 13, 15],
-                [ 6, 12, 14]
-            ], [
-                [140, 130,  70],
-                [105,  78, 132],
-                [ 90, 100,  48],
-                [110, 179, 110]
-            ])
+        self.legs = LegsKit()
+            #[
+            #    [ 5,  2,  0],
+            #    [ 4,  3,  1],
+            #    [ 7, 13, 15],
+            #    [ 6, 12, 14]
+            #], [
+            #    [140, 130,  70],
+            #    [105,  78, 132],
+            #    [ 90, 100,  48],
+            #    [110, 179, 110]
+            #])
+            
 
 
 
 
         self.servo_individual_control = self.create_subscription(
-            ServoAngle,
+            ServoAngleNew,
             "/subwoofer/servos/servo_update",
             self.servo_update,
             10
@@ -73,20 +88,35 @@ class ServoControl(Node):
 
 
 
-    def servo_update(self, msg: ServoAngle):
-        if self.kit is None:
+    def servo_update(self, msg: ServoAngleNew):
+        """
+        TODO
+        """
+        
+        if self.legs is None:
             return
         
         self.get_logger().info(f"Servo update: {msg.index} {msg.angle}")
-        if msg.index not in self.valid_servo_indices:
-            return
-        servo = self.kit.servo[msg.index]
-        if msg.angle not in range(servo.actuation_range):
-            return
+        leg = None
+        match msg.leg:
+            case 0:
+                leg = self.legs.front_left
+            case 1:
+                leg = self.legs.front_right
+            case 2:
+                leg = self.legs.back_left
+            case 3:
+                leg = self.legs.back_right
+            case _:
+                return
         
-        servo.angle = msg.angle
+        leg.set_servo(msg.servo, msg.angle)
 
     def output_servo_values(self):
+        """
+        TODO
+        """
+        
         msg = LegPose()
         
         msg.front_left_hip = float(self.legs.front_left.servo_hip.angle)
@@ -109,7 +139,12 @@ class ServoControl(Node):
         
 
     def servo_update_all(self, msg: Float32):
-        if self.kit is None:
+        """
+        DEPRECATED
+        TODO
+        """
+        
+        if self.legs is None:
             return
         
         self.get_logger().info(f"Setting all servos to {msg.data}")
@@ -121,6 +156,10 @@ class ServoControl(Node):
             servo.angle = msg.data
 
     def set_standing(self, msg: Float32):
+        """
+        TODO
+        """
+        
         self.get_logger().info(f"Moving servos to standing")
         self.legs.stand(msg.data)
 
