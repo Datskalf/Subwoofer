@@ -27,9 +27,9 @@ class Leg():
         self.servo_upper = servo_upper
         self.servo_lower = servo_lower
 
-        self.servo_hip.default_angle = 0
-        self.servo_upper.default_angle = 145
-        self.servo_lower.default_angle = 145
+        self.servo_hip.default_angle = 90
+        self.servo_upper.default_angle = 135
+        self.servo_lower.default_angle = 90
 
 
     def _get_servo(self, servo_index: int) -> Servo:
@@ -106,6 +106,10 @@ class Leg():
         :param float height: Height offset for the leg.
         """
         
-        self.servo_hip.move_to(0)
+        print(f"hip angle: {self.servo_hip.default_angle}")
+        print(f"upper angle: {self.servo_upper.default_angle}")
+        print(f"lower angle: {self.servo_lower.default_angle}")
+
+        self.servo_hip.move_to(self.servo_hip.default_angle)
         self.servo_upper.move_to(self.servo_upper.default_angle + height)
-        self.servo_lower.move_to(self.servo_lower.default_angle + height*2)
+        self.servo_lower.move_to(self.servo_lower.default_angle - height*2)

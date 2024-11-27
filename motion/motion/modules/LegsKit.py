@@ -96,5 +96,6 @@ class LegsKit():
         :param float height: What the height should be adjusted by.
         """
 
-        for leg in [self.front_left, self.front_right, self.back_left, self.back_right]:
+        for i, leg in enumerate([self.front_left, self.front_right, self.back_left, self.back_right]):
+            print(f"Leg {i}:")
             leg.set_stand(height)

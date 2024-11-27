@@ -2,6 +2,7 @@
 TODO
 """
 
+import time
 import rclpy
 from rclpy.node import Node
 
@@ -22,6 +23,7 @@ class ServoControl(Node):
     
     kit: ServoKit | None = None
     legs: LegsKit | None = None
+    test: bool = False
 
     def __init__(self):
         """
@@ -82,6 +84,11 @@ class ServoControl(Node):
             LegPose,
             "/subwoofer/servos/current_angle",
             10
+        )
+
+        self.bounce_timer = self.create_timer(
+            1,
+            self.bounce
         )
 
         self.get_logger().info(f"Servo controller online!")
@@ -162,6 +169,11 @@ class ServoControl(Node):
         
         self.get_logger().info(f"Moving servos to standing")
         self.legs.stand(msg.data)
+
+    def bounce(self):
+        self.legs.stand(40)
+        time.sleep(100)
+        self.legs.stand(50)
 
 
 
