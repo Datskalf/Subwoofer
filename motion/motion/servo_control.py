@@ -96,7 +96,7 @@ class ServoControl(Node):
         if self.legs is None:
             return
         
-        self.get_logger().info(f"Servo update: {msg.index} {msg.angle}")
+        self.get_logger().info(f"Servo update: {msg.leg}-{msg.servo} {msg.angle}")
         leg = None
         match msg.leg:
             case 0:

@@ -5,7 +5,10 @@ TODO
 from .Leg import Leg
 
 from adafruit_servokit import ServoKit
-from Servo import Servo
+from adafruit_pca9685 import PCA9685
+import board
+from busio import I2C
+from .Servo import Servo
 
 class LegsKit():
     """
@@ -63,10 +66,27 @@ class LegsKit():
         Creates a new LegsKit object using the custom .modules.Servo implementation.
         """
 
-        self.front_left = Leg(Servo(5), Servo(2), Servo(0))
-        self.front_right = Leg(Servo(4), Servo(3, True), Servo(1, True))
-        self.back_left = Leg(Servo(7), Servo(13), Servo(15))
-        self.back_right = Leg(Servo(6), Servo(12, True), Servo(14, True))
+        self.pca = PCA9685(I2C(board.SCL, board.SDA))
+        self.pca.frequency = 60
+
+        self.front_left = Leg(
+            Servo(self.pca.channels[5]),
+            Servo(self.pca.channels[2]),
+            Servo(self.pca.channels[0]))
+        self.front_right = Leg(
+            Servo(self.pca.channels[4]),
+            Servo(self.pca.channels[3], True),
+            Servo(self.pca.channels[1], True))
+        self.back_left = Leg(
+            Servo(self.pca.channels[7]),
+            Servo(self.pca.channels[13]),
+            Servo(self.pca.channels[15]))
+        self.back_right = Leg(
+            Servo(self.pca.channels[6]),
+            Servo(self.pca.channels[12], True),
+            Servo(self.pca.channels[14], True))
+
+        
 
     def stand(self, height: float = 0.0) -> None:
         """
