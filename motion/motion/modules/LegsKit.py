@@ -87,6 +87,9 @@ class LegsKit():
             Servo(self.pca.channels[14], True))
 
         
+    def get_legs(self) -> list[Leg]:
+        return (self.front_left, self.front_right, self.back_left, self.back_right)
+
 
     def stand(self, height: float = 0.0) -> None:
         """
@@ -96,10 +99,12 @@ class LegsKit():
         :param float height: What the height should be adjusted by.
         """
 
-        for i, leg in enumerate([self.front_left, self.front_right, self.back_left, self.back_right]):
+        for i, leg in enumerate(self.get_legs()):
             print(f"Leg {i}:")
             leg.set_stand(height)
 
 
     def set_all_servos(self, angles: list[float]) -> None:
-        ...
+        for leg_index, leg in enumerate(self.get_legs()):
+            for servo_index in range(3):
+                leg.set_servo(servo_index, angles[leg_index*3 + servo_index])
