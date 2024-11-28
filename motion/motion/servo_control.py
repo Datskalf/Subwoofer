@@ -6,11 +6,9 @@ import time
 import rclpy
 from rclpy.node import Node
 
-from interfaces.msg import ServoAngleNew
+from interfaces.msg import ServoAngle
 from interfaces.msg import ServoAngles
 from std_msgs.msg import Float32
-
-from adafruit_servokit import ServoKit, Servo
 
 from .modules.Leg import Leg
 from .modules.LegsKit import LegsKit
@@ -20,7 +18,6 @@ class ServoControl(Node):
     TODO
     """
     
-    kit: ServoKit | None = None
     legs: LegsKit | None = None
     test: bool = False
 
@@ -32,41 +29,19 @@ class ServoControl(Node):
         super().__init__("servo_control")
 
         self.valid_servo_indices = [0,1,2,3,4,5,6,7,12,13,14,15]
-        values = [70,132,130,78, 105,140,110,90, 179,100,110,48]
-
-        try:
-            self.kit = ServoKit(channels=16)
-        except ValueError as ex:
-            self.get_logger().error(f"{ex}")
-            return
-            ...
 
         self.legs = LegsKit()
-            #[
-            #    [ 5,  2,  0],
-            #    [ 4,  3,  1],
-            #    [ 7, 13, 15],
-            #    [ 6, 12, 14]
-            #], [
-            #    [140, 130,  70],
-            #    [105,  78, 132],
-            #    [ 90, 100,  48],
-            #    [110, 179, 110]
-            #])
-            
-
-
 
 
         self.servo_individual_control = self.create_subscription(
-            ServoAngleNew,
+            ServoAngle,
             "/subwoofer/servos/servo_update",
             self.servo_update,
             10
         )
 
         self.servo_joint_control = self.create_subscription(
-            Float32,
+            ServoAngles,
             "/subwoofer/servos/servo_joint_update",
             self.servo_update_all,
             10
@@ -89,7 +64,7 @@ class ServoControl(Node):
 
 
 
-    def servo_update(self, msg: ServoAngleNew):
+    def servo_update(self, msg: ServoAngle):
         """
         TODO
         """
@@ -144,22 +119,20 @@ class ServoControl(Node):
 
         
 
-    def servo_update_all(self, msg: Float32):
+    def servo_update_all(self, msg: ServoAngles):
         """
-        DEPRECATED
+        DEPRECATED: Change to use ServoAngles msg interface
         TODO
         """
         
         if self.legs is None:
             return
+        if len(msg.angles) < 12:
+            return
         
-        self.get_logger().info(f"Setting all servos to {msg.data}")
-
-        for index in self.valid_servo_indices:
-            servo = self.kit.servo[index]
-            if msg.data not in range(servo.actuation_range):
-                continue
-            servo.angle = msg.data
+        self.legs.set_all_servos(msg.angles[:12])
+        
+        
 
     def set_standing(self, msg: Float32):
         """
@@ -168,11 +141,6 @@ class ServoControl(Node):
         
         self.get_logger().info(f"Moving servos to standing")
         self.legs.stand(msg.data)
-
-    def bounce(self):
-        self.legs.stand(40)
-        time.sleep(100)
-        self.legs.stand(50)
 
 
 

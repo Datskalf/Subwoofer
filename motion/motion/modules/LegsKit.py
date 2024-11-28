@@ -99,3 +99,7 @@ class LegsKit():
         for i, leg in enumerate([self.front_left, self.front_right, self.back_left, self.back_right]):
             print(f"Leg {i}:")
             leg.set_stand(height)
+
+
+    def set_all_servos(self, angles: list[float]) -> None:
+        ...
