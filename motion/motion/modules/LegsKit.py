@@ -1,5 +1,5 @@
 """
-TODO
+Package file containing the LegsKit class.
 """
 
 from .Leg import Leg
@@ -12,7 +12,8 @@ from .Servo import Servo
 
 class LegsKit():
     """
-    TODO
+    The LegsKit object initialises with predefined I2C addresses for every servo,
+    and bundles them together into Leg objects for easy interfacing.
     """
 
     front_left: Leg = None
@@ -105,6 +106,16 @@ class LegsKit():
 
 
     def set_all_servos(self, angles: list[float]) -> None:
+        """
+        Sets each servo to an angle defined in the angles parameter.
+        If an angle is set to -1, it will maintain its current angle.
+
+        :param list[float] angles: List of angles to set each servo to.
+        """
+        
         for leg_index, leg in enumerate(self.get_legs()):
             for servo_index in range(3):
-                leg.set_servo(servo_index, angles[leg_index*3 + servo_index])
+                angle = angles[leg_index*3 + servo_index]
+                if angle == -1.0:
+                    continue
+                leg.set_servo(servo_index, angle)

@@ -1,5 +1,5 @@
 """
-TODO
+Package file containing the custom Servo class.
 """
 
 from adafruit_pca9685 import PWMChannel
@@ -7,7 +7,6 @@ from adafruit_pca9685 import PWMChannel
 class Servo():
     """
     A custom implementation of the adafruit Servo class which allows for a wider range of motion.
-
     """
 
     def __init__(self, channel: PWMChannel, is_flipped: bool = False) -> None:

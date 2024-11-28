@@ -10,20 +10,19 @@ from interfaces.msg import ServoAngle
 from interfaces.msg import ServoAngles
 from std_msgs.msg import Float32
 
-from .modules.Leg import Leg
 from .modules.LegsKit import LegsKit
 
 class ServoControl(Node):
     """
-    TODO
+    This node is mainly responsible for controlling how the servos move on the Subwoofer robot dog.
     """
     
     legs: LegsKit | None = None
-    test: bool = False
 
     def __init__(self):
         """
-        TODO
+        Initialises the ServoControl node with the node name "servo_control"
+        The initialiser will hold a LegsKit object, allowing it to manipulate the robot's servos systematically.
         """
         
         super().__init__("servo_control")
@@ -66,7 +65,9 @@ class ServoControl(Node):
 
     def servo_update(self, msg: ServoAngle):
         """
-        TODO
+        Sets a specific servo to a given angle.
+
+        :param interfaces.msg.ServoAngle msg: Message with the servo angle and id
         """
         
         if self.legs is None:
@@ -121,8 +122,24 @@ class ServoControl(Node):
 
     def servo_update_all(self, msg: ServoAngles):
         """
-        DEPRECATED: Change to use ServoAngles msg interface
-        TODO
+        Takes in an array of servo angles and sets the servos to said angles in the order of:
+        - front left hip
+        - front left upper
+        - front left lower
+        - front right hip
+        - front right upper
+        - front right lower
+        - back left hip
+        - back left upper
+        - back left lower
+        - back right hip
+        - back right upper
+        - back right lower
+
+        If less than 12 elements is provided, the message will be discarded.
+        If any angles are out of range, they will be capped by the individual servos' actuation range.
+
+        :param interfaces.msg.ServoAngles msg: Message data containing all angles.
         """
         
         if self.legs is None:
@@ -147,9 +164,6 @@ class ServoControl(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = ServoControl()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt as ex:
-        pass
+    rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

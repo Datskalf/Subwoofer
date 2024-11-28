@@ -1,5 +1,5 @@
 """
-TODO
+Package file containing the Leg class.
 """
 
 from .Servo import Servo
