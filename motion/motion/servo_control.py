@@ -6,9 +6,8 @@ import time
 import rclpy
 from rclpy.node import Node
 
-from interfaces.msg import ServoAngle
 from interfaces.msg import ServoAngleNew
-from interfaces.msg import LegPose
+from interfaces.msg import ServoAngles
 from std_msgs.msg import Float32
 
 from adafruit_servokit import ServoKit, Servo
@@ -73,7 +72,7 @@ class ServoControl(Node):
             10
         )
 
-        self.set_standing = self.create_subscription(
+        self.set_standing_sub = self.create_subscription(
             Float32,
             "/subwoofer/servos/standing_height",
             self.set_standing,
@@ -81,14 +80,9 @@ class ServoControl(Node):
         )
 
         self.servo_angle_pub = self.create_publisher(
-            LegPose,
+            ServoAngles,
             "/subwoofer/servos/current_angle",
             10
-        )
-
-        self.bounce_timer = self.create_timer(
-            1,
-            self.bounce
         )
 
         self.get_logger().info(f"Servo controller online!")
@@ -124,25 +118,30 @@ class ServoControl(Node):
         TODO
         """
         
-        msg = LegPose()
-        
-        msg.front_left_hip = float(self.legs.front_left.servo_hip.angle)
-        msg.front_left_upper = float(self.legs.front_left.servo_upper.angle)
-        msg.front_left_lower = float(self.legs.front_left.servo_lower.angle)
-        
-        msg.front_right_hip = float(self.legs.front_right.servo_hip.angle)
-        msg.front_right_upper = float(self.legs.front_right.servo_upper.angle)
-        msg.front_right_lower = float(self.legs.front_right.servo_lower.angle)
+        msg = ServoAngles()
+            
+        try:
+            msg.angles = [
+                float(self.legs.front_left.servo_hip.angle),
+                float(self.legs.front_left.servo_upper.angle),
+                float(self.legs.front_left.servo_lower.angle),
 
-        msg.back_left_hip = float(self.legs.back_left.servo_hip.angle)
-        msg.back_left_upper = float(self.legs.back_left.servo_upper.angle)
-        msg.back_left_lower = float(self.legs.back_left.servo_lower.angle)
-        
-        msg.back_right_hip = float(self.legs.back_right.servo_hip.angle)
-        msg.back_right_upper = float(self.legs.back_right.servo_upper.angle)
-        msg.back_right_lower = float(self.legs.back_right.servo_lower.angle)
+                float(self.legs.front_right.servo_hip.angle),
+                float(self.legs.front_right.servo_upper.angle),
+                float(self.legs.front_right.servo_lower.angle),
 
+                float(self.legs.back_left.servo_hip.angle),
+                float(self.legs.back_left.servo_upper.angle),
+                float(self.legs.back_left.servo_lower.angle),
+
+                float(self.legs.back_right.servo_hip.angle),
+                float(self.legs.back_right.servo_upper.angle),
+                float(self.legs.back_right.servo_lower.angle),
+            ]
+        except:
+            msg.angles = [-1.0] * 12
         self.servo_angle_pub.publish(msg)
+
         
 
     def servo_update_all(self, msg: Float32):
