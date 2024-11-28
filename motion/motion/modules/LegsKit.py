@@ -70,6 +70,7 @@ class LegsKit():
         self.pca = PCA9685(I2C(board.SCL, board.SDA))
         self.pca.frequency = 60
 
+        # Create each leg with their default I2C channels
         self.front_left = Leg(
             Servo(self.pca.channels[5]),
             Servo(self.pca.channels[2]),
