@@ -63,11 +63,13 @@ class Leg():
         :raises IndexError: If servo index is out of bounds.
         """
 
+        # If servo doesn't exist, don't do anything
         try:
             servo: Servo = self._get_servo(servo_index)
         except IndexError:
             return
         
+        # Set servo
         if relative:
             servo.move_by(angle)
         else:
@@ -106,10 +108,6 @@ class Leg():
         :param float height: Height offset for the leg.
         """
         
-        print(f"hip angle: {self.servo_hip.default_angle}")
-        print(f"upper angle: {self.servo_upper.default_angle}")
-        print(f"lower angle: {self.servo_lower.default_angle}")
-
         self.servo_hip.move_to(self.servo_hip.default_angle)
         self.servo_upper.move_to(self.servo_upper.default_angle + height)
         self.servo_lower.move_to(self.servo_lower.default_angle - height*2)

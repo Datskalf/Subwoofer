@@ -48,7 +48,13 @@ class LegsKit():
             Servo(self.pca.channels[14], True))
 
         
-    def get_legs(self) -> list[Leg]:
+    def get_legs(self) -> tuple[Leg, Leg, Leg, Leg]:
+        """
+        Returns a tuple containing all four legs.
+
+        :return: All legs within the LegKit
+        :returnType: tuple[Leg, Leg, Leg, Leg]
+        """
         return (self.front_left, self.front_right, self.back_left, self.back_right)
 
 

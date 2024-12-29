@@ -27,7 +27,6 @@ class Servo():
         self.current_angle = None
         self.is_flipped = is_flipped
         self.default_angle = 90
-        ...
 
     def set_angle(self, angle: int) -> None:
         """
@@ -39,14 +38,17 @@ class Servo():
         :param int angle: Angle to send the servo to.
         """
 
+        # Correct for any servos rotating the opposite way
         if self.is_flipped:
             angle = self.max_angle - angle
         
+        # Cap rotation angle
         if angle < self.min_angle:
             angle = self.min_angle
         if angle > self.max_angle:
             angle = self.max_angle
 
+        # Set the servo angle
         self.current_angle = angle
         self.channel.duty_cycle = int(angle / self.max_angle * (self.max_duty_cycle - self.min_duty_cycle) + self.min_duty_cycle)
     
@@ -58,7 +60,6 @@ class Servo():
         :returns: Current servo angle
         :rtype: int | None
         """
-
         return self.current_angle
     
     def set_default_angle(self, angle: int) -> None:
@@ -67,20 +68,14 @@ class Servo():
 
         :param int angle: What angle should be default.
         """
-
+        # Cap angle
         if angle < self.min_angle:
-            self.default_angle = self.min_angle
-            return
+            angle = self.min_angle
         if angle > self.max_angle:
-            self.default_angle = self.max_angle
-            return
+            angle = self.max_angle
+        
+        # Set angle as default
         self.default_angle = angle
-
-    def set_current_as_0(self):
-        """
-        TODO
-        """
-        ...
 
     def move_to(self, angle: int) -> None:
         """

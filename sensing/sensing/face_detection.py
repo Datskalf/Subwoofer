@@ -1,30 +1,40 @@
-import rclpy
-from rclpy.node import Node
-from ament_index_python.packages import get_package_share_directory
+"""
+Handles all code related to face detection and image processing.
 
-from sensor_msgs.msg import Image, CompressedImage
+Much of this code is recommended to be offloaded onto a separate device for improved processing.
+"""
+
+# Message types
+from sensor_msgs.msg import CompressedImage
 from interfaces.msg import FacePoint, FacePoints
 
+# ROS libraries
+import rclpy
+from rclpy.node import Node
 from cv_bridge import CvBridge
 
+# System libraries
 import cv2
 import os
-import pathlib
+import numpy as np
 
 class FaceDetection(Node):
+    """
+    TODO
+    """
     last_image = None
-    #CASCADE_PATH: str = "/home/sondre/subwoofer/src/sensing/sensing/haarcascade_frontalface_default.xml"
-    #CASCADE_PATH: str = os.path.join(
-    #    pathlib.Path(__file__).parent.absolute(),
-    #    "haarcascade_frontalface_default.xml"
-    #)
     CASCADE_PATH: str = os.path.join(
         os.environ["SW_PATH"],
         "static",
         "haarcascade_frontalface_default.xml"
     )
+    outline_colour: tuple[int, int, int] = (0, 255, 0)
 
     def __init__(self):
+        """
+        TODO
+        """
+        
         super().__init__("face_detection")
         self.get_logger().info(f"Cascade path: {self.CASCADE_PATH}")
         self.cascade = cv2.CascadeClassifier(self.CASCADE_PATH)
@@ -54,9 +64,17 @@ class FaceDetection(Node):
 
 
     def detect_face(self, msg) -> None:
-        #self.get_logger().info(f"Running face detection")
+        """
+        Whenever an image is published, analyse it for faces and outline them
+
+        :param msg CompressedImage: published image.
+        """
+        
+        # Read in most recent image
         img = self.bridge.compressed_imgmsg_to_cv2(msg)
         self.last_image = img
+
+        # Determine where there are faces
         rects = self.cascade.detectMultiScale(
             img,
             scaleFactor=1.3,
@@ -65,6 +83,7 @@ class FaceDetection(Node):
             flags=cv2.CASCADE_SCALE_IMAGE
         )
 
+        # If any faces detected, draw boxes over them
         if len(rects) > 0:
             rects[:,2:] += rects[:,:2]
             msg1 = FacePoints()
@@ -78,14 +97,23 @@ class FaceDetection(Node):
                 msg1.points.append(r)
             
             self.face_detect_pub.publish(msg1)
-            self.draw_boxes(img, rects, (0,255,0))
+            self.draw_boxes(img, rects, self.outline_colour)
 
+        # Re-compress image, then publish it
         msg2 = self.bridge.cv2_to_compressed_imgmsg(img)
         self.face_box_pub.publish(msg2)
 
 
 
-    def draw_boxes(self, image, boxes: list[int], colour: tuple[int]) -> None:
+    def draw_boxes(self, image: np.ndarray, boxes: list[int, int, int, int], colour: tuple[int, int, int]) -> None:
+        """
+        Draws a box on the given image at the coordinates given in the boxes variable.
+
+        :param image np.dnarray: The opencv image
+        :param boxes list[int, int, int, int]: Coordinates for the box corners
+        :param colour tuple[int, int, int]: What colour the box should be draws as.
+        """
+        
         for x1, y1, x2, y2 in boxes:
             cv2.rectangle(image, (x1, y1), (x2, y2), colour, 2)
 

@@ -1,8 +1,7 @@
 """
-TODO
+Contains the main control code for servo controls.
 """
 
-import time
 import rclpy
 from rclpy.node import Node
 
@@ -32,6 +31,7 @@ class ServoControl(Node):
         self.legs = LegsKit()
 
 
+        # Subscriptions
         self.servo_individual_control = self.create_subscription(
             ServoAngle,
             "/subwoofer/servos/servo_update",
@@ -73,6 +73,7 @@ class ServoControl(Node):
         if self.legs is None:
             return
         
+        # Log servo update
         self.get_logger().info(f"Servo update: {msg.leg}-{msg.servo} {msg.angle}")
         leg = None
         match msg.leg:
@@ -91,28 +92,29 @@ class ServoControl(Node):
 
     def output_servo_values(self):
         """
-        TODO
+        Publishes all servo angles to its own topic.
+        If unable to get angles, publishes all as negative
         """
         
         msg = ServoAngles()
             
         try:
             msg.angles = [
-                float(self.legs.front_left.servo_hip.angle),
-                float(self.legs.front_left.servo_upper.angle),
-                float(self.legs.front_left.servo_lower.angle),
+                float(self.legs.front_left.servo_hip.get_angle()),
+                float(self.legs.front_left.servo_upper.get_angle()),
+                float(self.legs.front_left.servo_lower.get_angle()),
 
-                float(self.legs.front_right.servo_hip.angle),
-                float(self.legs.front_right.servo_upper.angle),
-                float(self.legs.front_right.servo_lower.angle),
+                float(self.legs.front_right.servo_hip.get_angle()),
+                float(self.legs.front_right.servo_upper.get_angle()),
+                float(self.legs.front_right.servo_lower.get_angle()),
 
-                float(self.legs.back_left.servo_hip.angle),
-                float(self.legs.back_left.servo_upper.angle),
-                float(self.legs.back_left.servo_lower.angle),
+                float(self.legs.back_left.servo_hip.get_angle()),
+                float(self.legs.back_left.servo_upper.get_angle()),
+                float(self.legs.back_left.servo_lower.get_angle()),
 
-                float(self.legs.back_right.servo_hip.angle),
-                float(self.legs.back_right.servo_upper.angle),
-                float(self.legs.back_right.servo_lower.angle),
+                float(self.legs.back_right.servo_hip.get_angle()),
+                float(self.legs.back_right.servo_upper.get_angle()),
+                float(self.legs.back_right.servo_lower.get_angle()),
             ]
         except:
             msg.angles = [-1.0] * 12
@@ -153,7 +155,8 @@ class ServoControl(Node):
 
     def set_standing(self, msg: Float32):
         """
-        TODO
+        TODO Not working
+        Sets all servo angles to their default angle for standing.
         """
         
         self.get_logger().info(f"Moving servos to standing")
