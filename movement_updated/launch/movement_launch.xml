@@ -1,0 +1,17 @@
+<launch>
+    <!-- Leg control nodes -!->
+    <node pkg="movement_updated" exec="Leg.py" name="Leg1" args="_name:=Leg_1 _number:=0"/>
+    <node pkg="movement_updated" exec="Leg.py" name="Leg2" args="_name:=Leg_4 _number:=1"/>
+    <node pkg="movement_updated" exec="Leg.py" name="Leg3" args="_name:=Leg_2 _number:=2"/>
+    <node pkg="movement_updated" exec="Leg.py" name="Leg4" args="_name:=Leg_3 _number:=3"/>
+    -->
+
+    <!-- Servo control nodes -->
+    <!--<node pkg="movement_updated" name="Servo3" exec="ServoControl.py" args="_LegName:=Leg_1 _ServoNumber:=2 _ServoName:=front_right_foot"/>-->
+
+    <node pkg="movement_updated" exec="ServoControl" name="Servo1">
+        <remap from="/subwoofer/MoveLegs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo1_position_controller/command" />
+    </node>
+
+</launch>

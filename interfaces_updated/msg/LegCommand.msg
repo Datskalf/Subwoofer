@@ -1,2 +1,2 @@
-float64[3] Angles
-int8[4] Legs
+float64[3] angles
+int8[4] legs
