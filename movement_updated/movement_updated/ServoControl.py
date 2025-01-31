@@ -11,20 +11,31 @@ class ServoControl(Node):
     def __init__(self):
         super().__init__("servo_control")
 
-        self.leg_name = "NULL"
-        self.servo_number = -1
-        self.servo_name = "NULL"
+        self.declare_parameters(
+            namespace="",
+            parameters=[
+                ("servo_name", "Servo_x"),
+                ("servo_number", -1),
+                ("leg_name", "Leg_x"),
+                ("leg_number", -1)
+            ]
+        )
+
+        self.servo_name = self.get_parameter("servo_name").value
+        self.servo_number = self.get_parameter("servo_number").value
+        self.leg_name = self.get_parameter("leg_name").value
+        self.leg_number = self.get_parameter("leg_number").value
 
         self.servo_sub = self.create_subscription(
             ServoCommand,
-            f"/subwoofer/legs/dummy_leg",
+            f"/subwoofer/MoveLegs/{self.leg_name}",
             self.receive_servo,
             10
         )
 
         self.servo_pub = self.create_publisher(
             Float64,
-            f"/subwoofer/servo_controller",
+            f"/subwoofer/{self.servo_name}_position_controller/command",
             10
         )
 
@@ -35,8 +46,10 @@ class ServoControl(Node):
 
 
     def move_servo(self) -> None:
-        if self.servo_number == -1:
+        if self.servo_number == "-1":
             return
+        
+        return
         
         msg_out = Float64()
         msg_out.data = self.last_angle

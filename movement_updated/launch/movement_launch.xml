@@ -8,71 +8,99 @@
 
     <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_1">
         <param name="name" value="Leg_1" />
+        <param name="number" type="int" value="1" />
     </node>
 
     <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_2">
         <param name="name" value="Leg_2" />
+        <param name="number" type="int" value="2" />
     </node>
 
     <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_3">
         <param name="name" value="Leg_3" />
+        <param name="number" type="int" value="3" />
     </node>
 
     <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_4">
         <param name="name" value="Leg_4" />
+        <param name="number" type="int" value="4" />
     </node>
 
     <!-- Servo control nodes -->
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_1">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo1_position_controller/command" />
+        <param name="servo_name" value="Servo_1" />
+        <param name="servo_number" type="int" value="1" />
+        <param name="leg_name" value="Leg_1" />
+        <param name="leg_number" type="int" value="1" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_2">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo2_position_controller/command" />
+        <param name="servo_name" value="Servo_2" />
+        <param name="servo_number" type="int" value="2" />
+        <param name="leg_name" value="Leg_2" />
+        <param name="leg_number" type="int" value="2" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_3">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo3_position_controller/command" />
+        <param name="servo_name" value="Servo_3" />
+        <param name="servo_number" type="int" value="3" />
+        <param name="leg_name" value="Leg_3" />
+        <param name="leg_number" type="int" value="3" />
     </node>
 
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_4">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_right" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo4_position_controller/command" />
+        <param name="servo_name" value="Servo_4" />
+        <param name="servo_number" type="int" value="4" />
+        <param name="leg_name" value="Leg_4" />
+        <param name="leg_number" type="int" value="4" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_5">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_right" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo5_position_controller/command" />
+        <param name="servo_name" value="Servo_5" />
+        <param name="servo_number" type="int" value="5" />
+        <param name="leg_name" value="Leg_5" />
+        <param name="leg_number" type="int" value="5" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_6">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_right" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo6_position_controller/command" />
+        <param name="servo_name" value="Servo_6" />
+        <param name="servo_number" type="int" value="6" />
+        <param name="leg_name" value="Leg_6" />
+        <param name="leg_number" type="int" value="6" />
     </node>
 
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_7">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_left" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo7_position_controller/command" />
+        <param name="servo_name" value="Servo_7" />
+        <param name="servo_number" type="int" value="7" />
+        <param name="leg_name" value="Leg_7" />
+        <param name="leg_number" type="int" value="7" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_8">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_left" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo8_position_controller/command" />
+        <param name="servo_name" value="Servo_8" />
+        <param name="servo_number" type="int" value="8" />
+        <param name="leg_name" value="Leg_8" />
+        <param name="leg_number" type="int" value="8" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_9">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_left" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo9_position_controller/command" />
+        <param name="servo_name" value="Servo_9" />
+        <param name="servo_number" type="int" value="9" />
+        <param name="leg_name" value="Leg_9" />
+        <param name="leg_number" type="int" value="9" />
     </node>
 
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_10">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_right" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo10_position_controller/command" />
+        <param name="servo_name" value="Servo_10" />
+        <param name="servo_number" type="int" value="10" />
+        <param name="leg_name" value="Leg_10" />
+        <param name="leg_number" type="int" value="10" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_11">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_right" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo11_position_controller/command" />
+        <param name="servo_name" value="Servo_11" />
+        <param name="servo_number" type="int" value="11" />
+        <param name="leg_name" value="Leg_11" />
+        <param name="leg_number" type="int" value="11" />
     </node>
     <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_12">
-        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_right" />
-        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo12_position_controller/command" />
+        <param name="servo_name" value="Servo_12" />
+        <param name="servo_number" type="int" value="12" />
+        <param name="leg_name" value="Leg_12" />
+        <param name="leg_number" type="int" value="12" />
     </node>
 
 </launch>
