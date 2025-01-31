@@ -6,12 +6,73 @@
     <node pkg="movement_updated" exec="Leg.py" name="Leg4" args="_name:=Leg_3 _number:=3"/>
     -->
 
-    <!-- Servo control nodes -->
-    <!--<node pkg="movement_updated" name="Servo3" exec="ServoControl.py" args="_LegName:=Leg_1 _ServoNumber:=2 _ServoName:=front_right_foot"/>-->
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_1">
+        <param name="name" value="Leg_1" />
+    </node>
 
-    <node pkg="movement_updated" exec="ServoControl" name="Servo1">
-        <remap from="/subwoofer/MoveLegs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_2">
+        <param name="name" value="Leg_2" />
+    </node>
+
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_3">
+        <param name="name" value="Leg_3" />
+    </node>
+
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/" exec="LegControl" name="Leg_4">
+        <param name="name" value="Leg_4" />
+    </node>
+
+    <!-- Servo control nodes -->
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_1">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
         <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo1_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_2">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo2_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_3">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_left" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo3_position_controller/command" />
+    </node>
+
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_4">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_right" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo4_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_5">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_right" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo5_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_6">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/front_right" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo6_position_controller/command" />
+    </node>
+
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_7">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_left" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo7_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_8">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_left" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo8_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_9">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_left" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo9_position_controller/command" />
+    </node>
+
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_10">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_right" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo10_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_11">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_right" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo11_position_controller/command" />
+    </node>
+    <node pkg="movement_updated" namespace="/subwoofer/Legs/Servos/" exec="ServoControl" name="Servo_12">
+        <remap from="/subwoofer/legs/dummy_leg" to="/subwoofer/MoveLegs/rear_right" />
+        <remap from="/subwoofer/servo_controller" to="/subwoofer/Servo12_position_controller/command" />
     </node>
 
 </launch>

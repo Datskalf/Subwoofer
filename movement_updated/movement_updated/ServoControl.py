@@ -8,7 +8,7 @@ from interfaces_updated.msg import ServoCommand
 class ServoControl(Node):
     last_angle: Float64 = 0
 
-    def __init__(self, args):
+    def __init__(self):
         super().__init__("servo_control")
 
         self.leg_name = "NULL"
@@ -17,7 +17,7 @@ class ServoControl(Node):
 
         self.servo_sub = self.create_subscription(
             ServoCommand,
-            f"/subwoofer/MoveLegs/dummy_leg",
+            f"/subwoofer/legs/dummy_leg",
             self.receive_servo,
             10
         )
@@ -49,9 +49,7 @@ class ServoControl(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-
-    print(args)
-    node = ServoControl(args)
+    node = ServoControl()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

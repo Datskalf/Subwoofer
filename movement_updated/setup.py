@@ -26,7 +26,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'ServoControl = movement_updated.ServoControl:main'
+            'ServoControl = movement_updated.ServoControl:main',
+            'LegControl = movement_updated.Leg:main'
         ],
     },
 )
