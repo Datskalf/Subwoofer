@@ -3,7 +3,7 @@ from rclpy.node import Node
 
 from std_msgs.msg import Float64
 from interfaces_updated.msg import ServoCommand
-from modules.Servo import Servo
+from .modules.Servo import Servo
 
 
 class ServoControl(Node):
@@ -44,7 +44,7 @@ class ServoControl(Node):
 
         self.servo_pub = self.create_publisher(
             Float64,
-            f"/subwoofer/{self.servo_name}_position_controller/command",
+            f"/subwoofer/Legs/{self.leg_name}/{self.servo_name}_position_controller/command",
             10
         )
 
