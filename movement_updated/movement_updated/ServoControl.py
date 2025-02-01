@@ -49,6 +49,7 @@ class ServoControl(Node):
         if self.servo_number == "-1":
             return
         
+        self.get_logger().info("Updating servo angle")
         return
         
         msg_out = Float64()
