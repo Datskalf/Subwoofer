@@ -3,6 +3,7 @@ from rclpy.node import Node
 
 from std_msgs.msg import Float64
 from interfaces_updated.msg import ServoCommand
+from modules.Servo import Servo
 
 
 class ServoControl(Node):
@@ -17,7 +18,8 @@ class ServoControl(Node):
                 ("servo_name", "Servo_x"),
                 ("servo_number", -1),
                 ("leg_name", "Leg_x"),
-                ("leg_number", -1)
+                ("leg_number", -1),
+                ("pwm_channel", -1)
             ]
         )
 
@@ -25,6 +27,13 @@ class ServoControl(Node):
         self.servo_number = self.get_parameter("servo_number").value
         self.leg_name = self.get_parameter("leg_name").value
         self.leg_number = self.get_parameter("leg_number").value
+        self.pwm_channel = self.get_parameter("pwm_channel").value
+
+
+        # Create servo connection
+        if self.pwm_channel != -1:
+            self.servo = Servo(self.pwm_channel)
+
 
         self.servo_sub = self.create_subscription(
             ServoCommand,
@@ -51,10 +60,6 @@ class ServoControl(Node):
         
         self.get_logger().info("Updating servo angle")
         return
-        
-        msg_out = Float64()
-        msg_out.data = self.last_angle
-        self.servo_pub.publish(msg_out)
 
     def receive_servo(self, msg: ServoCommand) -> None:
         self.last_angle = msg.Angles[self.servo_number]
