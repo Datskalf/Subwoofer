@@ -8,6 +8,8 @@ from .modules.Servo import Servo
 
 class ServoControl(Node):
     last_angle: Float64 = 0
+    degrees_per_second: int = 10
+    servo: Servo|None = None
 
     def __init__(self):
         super().__init__("servo_control")
@@ -29,10 +31,12 @@ class ServoControl(Node):
         self.leg_number = self.get_parameter("leg_number").value
         self.pwm_channel = self.get_parameter("pwm_channel").value
 
+    
 
         # Create servo connection
         if self.pwm_channel != -1:
             self.servo = Servo(self.pwm_channel)
+            self.servo.move_to(0)
 
 
         self.servo_sub = self.create_subscription(
@@ -44,12 +48,12 @@ class ServoControl(Node):
 
         self.servo_pub = self.create_publisher(
             Float64,
-            f"/subwoofer/Legs/{self.leg_name}/{self.servo_name}_position_controller/command",
+            f"/subwoofer/Legs/{self.leg_name}/{self.servo_name}_controller",
             10
         )
 
         self.servo_timer = self.create_timer(
-            0.1,
+            1000 / self.degrees_per_second,
             self.move_servo
         )
 
@@ -58,7 +62,15 @@ class ServoControl(Node):
         if self.servo_number == "-1":
             return
         
-        self.get_logger().info("Updating servo angle")
+        # Move servo towards its goal
+        if self.servo is not None:
+            delta_angle = self.last_angle - self.servo.current_angle
+            if delta_angle > 1:
+                self.servo.move_by(1)
+            elif delta_angle < 1:
+                self.servo.move_by(-1)
+            else:
+                self.servo.move_by(delta_angle)
         return
 
     def receive_servo(self, msg: ServoCommand) -> None:
