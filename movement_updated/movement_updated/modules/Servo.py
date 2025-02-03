@@ -17,80 +17,52 @@ class Servo():
         :param bool is_flipped: If the servo angle need to be raised or lowered when raising the robot.
         """
         
-        self.channel = channel
-        self.min_angle = 0
-        self.max_angle = 180
-        self.min_duty_cycle = 2000
-        self.max_duty_cycle = 10000
+        self.channel: PWMChannel = channel
+        self.min_duty_cycle: int = 2000
+        self.max_duty_cycle: int = 10000
         self.duty_cycle_per_degree: float = 44.4444
-        self.duty_cycle_at_0 = 2000
-        self.current_angle = None
-        self.is_flipped = is_flipped
-        self.default_angle = 90
 
-    def set_angle(self, angle: int) -> None:
-        """
-        Moves the conencted servo to the specific angle.
-        
-        If the given angle is outside the actuation range of the servo,
-        the angle is capped.
+        self.min_angle: int = -90
+        self.max_angle: int = 90
 
-        :param int angle: Angle to send the servo to.
-        """
+        self.current_angle: int = None
 
-        # Correct for any servos rotating the opposite way
-        if self.is_flipped:
-            angle = self.max_angle - angle
-        
-        # Cap rotation angle
-        if angle < self.min_angle:
-            angle = self.min_angle
-        if angle > self.max_angle:
-            angle = self.max_angle
 
-        # Set the servo angle
-        self.current_angle = angle
-        self.channel.duty_cycle = int(angle / self.max_angle * (self.max_duty_cycle - self.min_duty_cycle) + self.min_duty_cycle)
     
-    def get_angle(self) -> int | None:
-        """
-        Fetches the current servo angle, if one exists.
-        Otherwise, returns nothing
-
-        :returns: Current servo angle
-        :rtype: int | None
-        """
-        return self.current_angle
-    
-    def set_default_angle(self, angle: int) -> None:
-        """
-        Stores at what angle the default position is for standing.
-
-        :param int angle: What angle should be default.
-        """
-        # Cap angle
-        if angle < self.min_angle:
-            angle = self.min_angle
-        if angle > self.max_angle:
-            angle = self.max_angle
-        
-        # Set angle as default
-        self.default_angle = angle
-
     def move_to(self, angle: int) -> None:
-        """
-        Moves the servo to the specified angle.
+        angle = self._cap_angle(angle)
+        dc = self._angle_to_duty_cycle(angle)
+        self.channel.duty_cycle = dc
+        self.current_angle = angle
 
-        :param int angle: What angle the servo should go to.
-        """
+    def move_by(self, angle: int) -> None:
+        angle = self._cap_angle(self.current_angle + angle)
+        self.move_to(angle)
 
-        self.set_angle(angle)
 
-    def move_by(self, angle: int):
-        """
-        Moves the servo by a given angle.
 
-        :param int angle: How far the servo should rotate.
-        """
+    def _cap_angle(self, angle: int) -> int:
+        if angle < self.min_angle:
+            return self.min_angle
+        if angle > self.max_angle:
+            return self.max_angle
+        return angle
 
-        self.set_angle(self.current_angle + angle)
+    def _angle_to_duty_cycle(self, angle: int) -> float|int:
+        angle = self._cap_angle(angle)
+        angle_offset_from_min = angle - self.min_angle
+        duty_cycle_offset = angle_offset_from_min * self.duty_cycle_per_degree
+        return duty_cycle_offset + self.min_duty_cycle
+        
+
+def main():
+    """
+    Can define test cases here.
+    """
+    servo = Servo(1)
+    for i in range(-100, 120, 20):
+        print(f"Angle {i}: output {servo._cap_angle(i)}")
+    print(servo._angle_to_duty_cycle(45))
+
+if __name__ == "__main__":
+    main()
