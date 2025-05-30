@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="subwoofer" exec="subwoofer" name="subwoofer">
+        <param name="simulated" value="True" />
+    </node>
+</launch>

@@ -7,7 +7,8 @@ from .modules.Servo import Servo
 
 
 class ServoControl(Node):
-    last_angle: Float64 = 0
+    last_angle: Float64 = 0.0
+    target_angle: Float64 = 0.0
     degrees_per_second: int = 10
     servo: Servo|None = None
 
@@ -53,9 +54,19 @@ class ServoControl(Node):
         )
 
         self.servo_timer = self.create_timer(
-            1000 / self.degrees_per_second,
+            100,
             self.move_servo
         )
+
+    def set_move_command(self, angle: int, time: int = None) -> None:
+        if time is None:
+            time = 2
+        if time <= 0:
+            self.servo.move_to(angle)
+            return
+        d_angle = self.last_angle - angle
+        self.degrees_per_second = d_angle / time
+        self.target_angle = angle
 
 
     def move_servo(self) -> None:
@@ -64,14 +75,12 @@ class ServoControl(Node):
         
         # Move servo towards its goal
         if self.servo is not None:
-            delta_angle = self.last_angle - self.servo.current_angle
-            if delta_angle > 1:
-                self.servo.move_by(1)
-            elif delta_angle < 1:
-                self.servo.move_by(-1)
-            else:
-                self.servo.move_by(delta_angle)
-        return
+            
+
+            return
+    
+    def receive_move_speed(self, msg) -> None:
+        ...
 
     def receive_servo(self, msg: ServoCommand) -> None:
         self.last_angle = msg.Angles[self.servo_number]
