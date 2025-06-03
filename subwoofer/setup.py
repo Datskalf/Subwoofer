@@ -26,7 +26,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "servo = subwoofer.servo:main",
+            "servo = subwoofer.servo_control:main",
             "FaceDetection = subwoofer.face_detection:main",
         ],
     },

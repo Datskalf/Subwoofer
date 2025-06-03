@@ -19,24 +19,23 @@ import os
 import numpy as np
 
 class FaceDetection(Node):
-    """
-    TODO
-    """
+    """TODO: Add description."""
+    
     last_image = None
     outline_colour: tuple[int, int, int] = (0, 255, 0)
 
     def __init__(self):
-        """
-        TODO
-        """
+        """TODO: Add description."""
         super().__init__("face_detection")
 
         self.param_cascade_path = self.declare_parameter("cascade_path", None)
         self.cascade_path = self.get_parameter("cascade_path")
         if self.cascade_path is None:
-            self.get_logger().fatal("No cascade file provided.")
-            self.destroy_node()
-            return
+            path = os.path.join(
+                os.environ["SW_PATH"],
+                "static",
+                "harrcascade_frontalface_default.xml"
+            )
         self.get_logger().info(f"Cascade path: {self.cascade_path}")
         try:
             self.cascade = cv2.CascadeClassifier(self.cascade_path)
@@ -72,11 +71,10 @@ class FaceDetection(Node):
 
     def detect_face(self, msg) -> None:
         """
-        Whenever an image is published, analyse it for faces and outline them
+        Whenever an image is published, analyse it for faces and outline them.
 
         :param msg CompressedImage: published image.
         """
-        
         # Read in most recent image
         img = self.bridge.compressed_imgmsg_to_cv2(msg)
         self.last_image = img
@@ -120,7 +118,6 @@ class FaceDetection(Node):
         :param boxes list[int, int, int, int]: Coordinates for the box corners
         :param colour tuple[int, int, int]: What colour the box should be draws as.
         """
-        
         for x1, y1, x2, y2 in boxes:
             cv2.rectangle(image, (x1, y1), (x2, y2), colour, 2)
 
