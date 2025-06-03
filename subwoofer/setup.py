@@ -20,13 +20,14 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Sondre Flakstad',
-    maintainer_email='Datskalf@outlook.com',
+    maintainer_email='SondreFlakstad@outlook.com',
     description='TODO: Package description',
     license='MIT',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "subwoofer = scripts.subwoofer:main"
+            "servo = subwoofer.servo:main",
+            "FaceDetection = subwoofer.face_detection:main",
         ],
     },
 )

@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="subwoofer" exec="FaceDetection" namespace="/subwoofer">
+        <param name="cascade_path" value="" />
+    </node>
+</launch>

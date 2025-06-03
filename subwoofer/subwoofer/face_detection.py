@@ -1,7 +1,7 @@
 """
 Handles all code related to face detection and image processing.
 
-Much of this code is recommended to be offloaded onto a separate device for improved processing.
+This code is recommended to be offloaded onto a separate device for improved processing.
 """
 
 # Message types
@@ -23,21 +23,28 @@ class FaceDetection(Node):
     TODO
     """
     last_image = None
-    CASCADE_PATH: str = os.path.join(
-        os.environ["SW_PATH"],
-        "static",
-        "haarcascade_frontalface_default.xml"
-    )
     outline_colour: tuple[int, int, int] = (0, 255, 0)
 
     def __init__(self):
         """
         TODO
         """
-        
         super().__init__("face_detection")
-        self.get_logger().info(f"Cascade path: {self.CASCADE_PATH}")
-        self.cascade = cv2.CascadeClassifier(self.CASCADE_PATH)
+
+        self.param_cascade_path = self.declare_parameter("cascade_path", None)
+        self.cascade_path = self.get_parameter("cascade_path")
+        if self.cascade_path is None:
+            self.get_logger().fatal("No cascade file provided.")
+            self.destroy_node()
+            return
+        self.get_logger().info(f"Cascade path: {self.cascade_path}")
+        try:
+            self.cascade = cv2.CascadeClassifier(self.cascade_path)
+        except:
+            self.get_logger().fatal("Unable to load cascade file.")
+            self.destroy_node()
+            return
+
 
         self.bridge = CvBridge()
 

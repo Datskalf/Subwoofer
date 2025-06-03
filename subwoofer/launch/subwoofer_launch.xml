@@ -1,5 +1,65 @@
 <launch>
-    <node pkg="subwoofer" exec="subwoofer" name="subwoofer">
+    <node pkg="subwoofer" exec="servo" name="hip" namespace="/subwoofer/leg_1/">
         <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="upper" namespace="/subwoofer/leg_1/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="lower" namespace="/subwoofer/leg_1/">
+        <param name="simulated" value="True" /> 
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    
+    <node pkg="subwoofer" exec="servo" name="hip" namespace="/subwoofer/leg_2/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="upper" namespace="/subwoofer/leg_2/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="lower" namespace="/subwoofer/leg_2/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+
+    <node pkg="subwoofer" exec="servo" name="hip" namespace="/subwoofer/leg_3/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="upper" namespace="/subwoofer/leg_3/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="lower" namespace="/subwoofer/leg_3/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+
+    <node pkg="subwoofer" exec="servo" name="hip" namespace="/subwoofer/leg_4/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="upper" namespace="/subwoofer/leg_4/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
+    </node>
+    <node pkg="subwoofer" exec="servo" name="lower" namespace="/subwoofer/leg_4/">
+        <param name="simulated" value="True" />
+        <param name="pwm_channel" value="-1" />
+        <param name="flipped" value="false" />
     </node>
 </launch>
