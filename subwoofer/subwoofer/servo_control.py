@@ -8,6 +8,8 @@ from subwoofer_interfaces.action import Angle
 
 from subwoofer.servo_pkg.Servo import Servo
 
+import time
+
 
 class ServoControl(Node):
     def __init__(self):
@@ -33,38 +35,45 @@ class ServoControl(Node):
 
         self.servo = Servo(self.pwm_channel, self.is_flipped, self.is_simulated)
 
+        self.servo_update_timer = self.create_timer(0.1, self.servo_update)
+
         self.action_server_angle = ActionServer(
             self,
             Angle,
             f"{self.get_name()}/set_angle",
-            self.servo_update
+            self.servo_angle_update
         )
         
         self.pub_angle = self.create_publisher(Float32,
                                                      f"{self.get_name()}/current_angle",
                                                      10)
         
-        self.pub_angle_timer = self.create_timer(0.5, self.angle_pub)
+        self.pub_angle_timer = self.create_timer(0.1, self.angle_pub)
+
+    def servo_update(self) -> None:
+        self.servo.update()
 
     def angle_pub(self) -> None:
         msg = Float32()
         msg.data = self.servo.get_angle()
         self.pub_angle.publish(msg)
 
-    def servo_update(self, handle):
+    def servo_angle_update(self, handle):
         self.get_logger().info("Received servo update...")
 
-        self.servo.move_to(handle.request.angle)
+        self.servo.set_angle(handle.request.angle, handle.request.degrees_per_second)
 
-        max_iterations = 1000
-
-        for _ in range(max_iterations):
+        max_time = 4
+        start_time = time.time()
+        while time.time() - start_time < max_time:
             feedback = Angle.Feedback()
             feedback.current_angle = self.servo.get_angle()
             self.get_logger().info(f"Publishing feedback {feedback.current_angle}")
             handle.publish_feedback(feedback)
 
-            if abs(self.servo.current_angle - handle.request.angle) < 0.1:
+            self.servo.update()
+
+            if abs(self.servo.current_angle - handle.request.angle) < 0.01:
                 break
         
 

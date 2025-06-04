@@ -1,4 +1,5 @@
 float32 angle
+float32 degrees_per_second
 ---
 bool complete
 ---
