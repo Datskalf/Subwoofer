@@ -8,7 +8,7 @@ import rclpy
 from rclpy.node import Node
 import sys
 
-from std_msgs.msg import Int32
+from std_msgs.msg import Int32, Float32
 
 from subwoofer.servo_pkg.Servo import Servo
 
@@ -37,14 +37,26 @@ class ServoControl(Node):
 
         self.servo = Servo(self.pwm_channel, self.is_flipped, self.is_simulated)
 
-        self.servo_update = self.create_subscription(Int32,
-                                                 f"{self.get_name()}/set_angle",
-                                                 self.servo_update,
-                                                 10)
+        # Make into an action
+        #self.servo_update = self.create_subscription(Int32,
+        #                                         f"{self.get_name()}/set_angle",
+        #                                         self.servo_update,
+        #                                         10)
+        
+        self.pub_angle = self.create_publisher(Float32,
+                                                     f"{self.get_name()}/current_angle",
+                                                     10)
+        
+        self.pub_angle_timer = self.create_timer(0.5, self.angle_pub)
 
-    def servo_update(self, msg: Int32) -> None:
+    def angle_pub(self) -> None:
+        msg = Float32()
+        msg.data = self.servo.get_angle()
+        self.pub_angle.publish(msg)
+
+    def servo_update(self, msg: Float32) -> None:
         self.get_logger().info(f"Received value {msg.data}")
-        self.servo.move_to(msg.angle)
+        self.servo.move_to(msg.data)
 
 
 def main(args=None):

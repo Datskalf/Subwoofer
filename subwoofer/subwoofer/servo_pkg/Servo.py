@@ -28,9 +28,9 @@ class Servo():
         self.min_angle: int = -90
         self.max_angle: int = 90
 
-        self.current_angle: int = None
+        self.current_angle: float = 0.0
     
-    def move_to(self, angle: int) -> None:
+    def move_to(self, angle: float) -> None:
         """Move the servo to the specified angle."""
         angle = self._cap_angle(angle)
         dc = self._angle_to_duty_cycle(angle)
@@ -38,12 +38,13 @@ class Servo():
             self.channel.duty_cycle = dc
         self.current_angle = angle
 
-    def move_by(self, angle: int) -> None:
+    def move_by(self, angle: float) -> None:
         """Move the servo by the given angle relative to its current position."""
         angle = self._cap_angle(self.current_angle + angle)
         self.move_to(angle)
 
     def get_angle(self) -> float:
+        return float(self.current_angle)
         ...
 
     def _cap_angle(self, angle: int) -> int:
