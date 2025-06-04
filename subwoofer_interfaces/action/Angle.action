@@ -1,0 +1,5 @@
+float32 angle
+---
+bool complete
+---
+float32 current_angle

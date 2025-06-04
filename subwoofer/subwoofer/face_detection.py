@@ -6,7 +6,7 @@ This code is recommended to be offloaded onto a separate device for improved pro
 
 # Message types
 from sensor_msgs.msg import CompressedImage
-from interfaces.msg import FacePoint, FacePoints
+from subwoofer_interfaces.msg import FacePoint, FacePoints
 
 # ROS libraries
 import rclpy

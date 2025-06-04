@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(interfaces)
+project(subwoofer_interfaces)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -15,13 +15,11 @@ find_package(geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces (${PROJECT_NAME}
-  "msg/ServoAngle.msg"
-  "msg/ServoAngleNew.msg"
-  "msg/ServoAngles.msg"
+  "msg/LegCommand.msg"
+  "msg/ServoCommand.msg"
+  "action/Angle.action"
   "msg/FacePoint.msg"
   "msg/FacePoints.msg"
-  "msg/MPU.msg"
-  DEPENDENCIES geometry_msgs
 )
 
 if(BUILD_TESTING)

@@ -1,14 +1,10 @@
-"""
-Lorem ipsum.
-
-Dolor sit amet
-"""
-
 import rclpy
 from rclpy.node import Node
+from rclpy.action import ActionServer
 import sys
 
 from std_msgs.msg import Int32, Float32
+from subwoofer_interfaces.action import Angle
 
 from subwoofer.servo_pkg.Servo import Servo
 
@@ -37,11 +33,12 @@ class ServoControl(Node):
 
         self.servo = Servo(self.pwm_channel, self.is_flipped, self.is_simulated)
 
-        # Make into an action
-        #self.servo_update = self.create_subscription(Int32,
-        #                                         f"{self.get_name()}/set_angle",
-        #                                         self.servo_update,
-        #                                         10)
+        self.action_server_angle = ActionServer(
+            self,
+            Angle,
+            f"{self.get_name()}/set_angle",
+            self.servo_update
+        )
         
         self.pub_angle = self.create_publisher(Float32,
                                                      f"{self.get_name()}/current_angle",
@@ -54,9 +51,28 @@ class ServoControl(Node):
         msg.data = self.servo.get_angle()
         self.pub_angle.publish(msg)
 
-    def servo_update(self, msg: Float32) -> None:
-        self.get_logger().info(f"Received value {msg.data}")
-        self.servo.move_to(msg.data)
+    def servo_update(self, handle):
+        self.get_logger().info("Received servo update...")
+
+        self.servo.move_to(handle.request.angle)
+
+        max_iterations = 1000
+
+        for _ in range(max_iterations):
+            feedback = Angle.Feedback()
+            feedback.current_angle = self.servo.get_angle()
+            self.get_logger().info(f"Publishing feedback {feedback.current_angle}")
+            handle.publish_feedback(feedback)
+
+            if abs(self.servo.current_angle - handle.request.angle) < 0.1:
+                break
+        
+
+        handle.succeed()
+        result = Angle.Result()
+        result.complete = True
+        return result
+        ...
 
 
 def main(args=None):

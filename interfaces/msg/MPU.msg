@@ -1,3 +1,0 @@
-geometry_msgs/Vector3 acceleration
-geometry_msgs/Vector3 gyro
-float32 temperature

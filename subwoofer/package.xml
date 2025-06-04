@@ -10,7 +10,7 @@
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
   <depend>sensor_msgs</depend>
-  <depend>interfaces</depend>
+  <depend>subwoofer_interfaces</depend>
   <depend>numpy</depend>
   <depend>cv_bridge</depend>
 
