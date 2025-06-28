@@ -1,0 +1,4 @@
+float32 angle
+float32 velocity
+---
+bool is_valid

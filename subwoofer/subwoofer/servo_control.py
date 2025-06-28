@@ -1,87 +1,152 @@
 import rclpy
 from rclpy.node import Node
-from rclpy.action import ActionServer
 import sys
 
-from std_msgs.msg import Int32, Float32
-from subwoofer_interfaces.action import Angle
+from adafruit_pca9685 import PCA9685
+from adafruit_pca9685 import PWMChannel
+import board
+from busio import I2C
 
-from subwoofer.servo_pkg.Servo import Servo
+from std_msgs.msg import Float32
+from subwoofer_interfaces.srv import ServoMotion
+
+#from subwoofer.servo_pkg.Servo import Servo
 
 import time
 
 
 class ServoControl(Node):
+    """
+    The Servo node is responsible for controlling a single servo through ROS interactions.
+    The node is defined with an I2C address which should be unique (no checks implemented yet.)
+
+    When an angle is requested, this angle will be checked with limit values, and set as the
+    aim angle.
+    Every n seconds, will move the servo towards the aim angle at a set speed to emulate
+    continuous movement.
+    """
+
     def __init__(self):
+        """
+        Initialises the Servo node.
+        """
         super().__init__("servo")
 
-        self.declare_parameter("simulated", False)
+        self.declare_parameter("simulated", True)
         self.declare_parameter("pwm_channel", -1)
         self.declare_parameter("min_duty_cycle", 2000)
         self.declare_parameter("max_duty_cycle", 10000)
-        self.declare_parameter("duty_cycle_per_degree", 44.4444)
         self.declare_parameter("min_angle", -90)
         self.declare_parameter("max_angle", 90)
+        self.declare_parameter("max_velocity", 90)
         self.declare_parameter("flipped", False)
 
-        self.is_simulated = self.get_parameter("simulated")
-        self.pwm_channel = self.get_parameter("pwm_channel")
-        self.min_duty_cycle = self.get_parameter("min_duty_cycle")
-        self.max_duty_cycle = self.get_parameter("max_duty_cycle")
-        self.duty_cycle_per_degree = self.get_parameter("duty_cycle_per_degree")
-        self.min_angle = self.get_parameter("min_angle")
-        self.max_angle = self.get_parameter("max_angle")
-        self.is_flipped = self.get_parameter("flipped")
+        self.current_angle = 0
+        self.aim_angle = self.current_angle
+        self.current_speed = self.get_parameter("max_velocity").value
 
-        self.servo = Servo(self.pwm_channel, self.is_flipped, self.is_simulated)
+        self.min_angle = self.get_parameter("min_angle").value
+        self.max_angle = self.get_parameter("max_angle").value
+        self.min_duty_cycle = self.get_parameter("min_duty_cycle").value
+        self.max_duty_cycle = self.get_parameter("max_duty_cycle").value
+        self.is_flipped = self.get_parameter("flipped").value
 
-        self.servo_update_timer = self.create_timer(0.1, self.servo_update)
+        self.servo_init()
 
-        self.action_server_angle = ActionServer(
-            self,
-            Angle,
-            f"{self.get_name()}/set_angle",
-            self.servo_angle_update
-        )
-        
-        self.pub_angle = self.create_publisher(Float32,
-                                                     f"{self.get_name()}/current_angle",
+        # Publishers
+        self.pub_servo_angle = self.create_publisher(Float32,
+                                                     f"{self.get_name()}/angle",
                                                      10)
+        self.pub_servo_duty_cycle = self.create_publisher(Float32,
+                                                     f"{self.get_name()}/duty_cycle",
+                                                     10)
+
+        # Timers
+        self.servo_update_timer = self.create_timer(0.1,
+                                                    self.update_servo)
         
-        self.pub_angle_timer = self.create_timer(0.1, self.angle_pub)
+        # Services
+        self.servo_update_service = self.create_service(ServoMotion,
+                                                        f"{self.get_name()}/move",
+                                                        self.on_servo_request)
 
-    def servo_update(self) -> None:
-        self.servo.update()
+    def servo_init(self):
+        """
+        Creates and sets up the hardware functionality.
+        If simulated, will skip hardware-requiring features.
+        """
+        self.simulated = self.get_parameter("simulated").value
+        if not self.simulated:
+            self.pca = PCA9685(I2C(board.SCL, board.SDA))
+            self.pca.frequency = 60
+            self.channel = PWMChannel(self.pca, self.get_parameter("pwm_channel").value)
 
-    def angle_pub(self) -> None:
+        self.last_servo_update = time.time()
+        self.get_logger().info(f"Servo initialised successfully!")
+
+    def update_servo(self):
+        self.get_logger().debug(f"Updating servo location.")
+
+        delta_time = time.time() - self.last_servo_update
+        vel = self.current_speed
+
+        delta_angle = self.aim_angle - self.current_angle
+        if abs(delta_angle) <= delta_time * vel:
+            new_angle = self.aim_angle
+        else:
+            offset = delta_time * vel
+            if delta_angle < 0:
+                offset *= -1
+            new_angle = self.current_angle + offset
+
+        self.write_to_servo(new_angle)
+        self.last_servo_update = time.time()
+        
         msg = Float32()
-        msg.data = self.servo.get_angle()
-        self.pub_angle.publish(msg)
+        msg.data = float(self.current_angle)
+        self.pub_servo_angle.publish(msg)
 
-    def servo_angle_update(self, handle):
-        self.get_logger().info("Received servo update...")
 
-        self.servo.set_angle(handle.request.angle, handle.request.degrees_per_second)
+    def on_servo_request(self, request, response):
+        self.aim_angle = max(min(request.angle, self.max_angle), self.min_angle)
+        if request.velocity == 0.0:
+            self.current_speed = self.get_parameter("max_velocity").value
+        else:
+            self.current_speed = max(min(request.velocity, self.get_parameter("max_velocity").value), 0)
+        self.get_logger().info(
+            f"Received move request angle:{self.aim_angle}, vel:{request.velocity}, curr_vel:{self.current_speed}")
+        response.is_valid = True
+        return response
 
-        max_time = 4
-        start_time = time.time()
-        while time.time() - start_time < max_time:
-            feedback = Angle.Feedback()
-            feedback.current_angle = self.servo.get_angle()
-            self.get_logger().info(f"Publishing feedback {feedback.current_angle}")
-            handle.publish_feedback(feedback)
 
-            self.servo.update()
+    def write_to_servo(self, angle: float):
+        duty_cycle = self._angle_to_duty_cycle(angle)
+        if self.is_flipped:
+            duty_cycle = self.max_duty_cycle - duty_cycle
+        msg = Float32()
+        msg.data = duty_cycle
+        self.pub_servo_duty_cycle.publish(msg)
 
-            if abs(self.servo.current_angle - handle.request.angle) < 0.01:
-                break
+        if not self.simulated:
+            self.channel.duty_cycle = duty_cycle
+
+        self.current_angle = angle
+
+    def _angle_to_duty_cycle(self, angle: int) -> float|int:
+        """Convert an angle to its respective duty cycle."""
+        angle_offset_from_min = angle - self.min_angle
         
+        duty_cycle_per_degree = (self.max_duty_cycle-self.min_duty_cycle)/(self.max_angle-self.min_angle)
+        duty_cycle_offset = angle_offset_from_min * duty_cycle_per_degree
+        
+        return duty_cycle_offset + self.min_duty_cycle
+    
+    def _duty_cycle_to_angle(self, duty_cycle: int) -> float|int:
+        """Convert a duty cycle to its respective angle."""
+        dc_offset = duty_cycle - self.min_duty_cycle
+        degree_per_dc = (self.max_angle-self.min_angle)/(self.max_duty_cycle-self.min_duty_cycle)
+        return dc_offset * degree_per_dc + self.min_angle
 
-        handle.succeed()
-        result = Angle.Result()
-        result.complete = True
-        return result
-        ...
 
 
 def main(args=None):

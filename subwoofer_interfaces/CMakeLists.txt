@@ -15,11 +15,9 @@ find_package(geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces (${PROJECT_NAME}
-  "msg/LegCommand.msg"
-  "msg/ServoCommand.msg"
-  "action/Angle.action"
   "msg/FacePoint.msg"
   "msg/FacePoints.msg"
+  "srv/ServoMotion.srv"
 )
 
 if(BUILD_TESTING)
