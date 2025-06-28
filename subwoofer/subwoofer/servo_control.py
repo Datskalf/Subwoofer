@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 import sys
+import time
 
 from adafruit_pca9685 import PCA9685
 from adafruit_pca9685 import PWMChannel
@@ -9,10 +10,6 @@ from busio import I2C
 
 from std_msgs.msg import Float32
 from subwoofer_interfaces.srv import ServoMotion
-
-#from subwoofer.servo_pkg.Servo import Servo
-
-import time
 
 
 class ServoControl(Node):
@@ -27,9 +24,7 @@ class ServoControl(Node):
     """
 
     def __init__(self):
-        """
-        Initialises the Servo node.
-        """
+        """Initialises the Servo node."""
         super().__init__("servo")
 
         self.declare_parameter("simulated", True)
@@ -85,6 +80,10 @@ class ServoControl(Node):
         self.get_logger().info(f"Servo initialised successfully!")
 
     def update_servo(self):
+        """
+        Updates the servo angle.
+        Will shift the servo angle by however far it should have moved assuming linear velocity.
+        """
         self.get_logger().debug(f"Updating servo location.")
 
         delta_time = time.time() - self.last_servo_update
@@ -108,6 +107,13 @@ class ServoControl(Node):
 
 
     def on_servo_request(self, request, response):
+        """
+        When called, sets the aimed angle.
+        Will overwrite the current aim & velocity.
+
+        Both the supplied angle and velocity will be capped by the servo limits.
+        If no velocity is supplied, the default max velocity is used.
+        """
         self.aim_angle = max(min(request.angle, self.max_angle), self.min_angle)
         if request.velocity == 0.0:
             self.current_speed = self.get_parameter("max_velocity").value
@@ -120,6 +126,10 @@ class ServoControl(Node):
 
 
     def write_to_servo(self, angle: float):
+        """
+        Writes an angle to the servo channel.
+        Additionally publishes the duty cicle written.
+        """
         duty_cycle = self._angle_to_duty_cycle(angle)
         if self.is_flipped:
             duty_cycle = self.max_duty_cycle - duty_cycle
