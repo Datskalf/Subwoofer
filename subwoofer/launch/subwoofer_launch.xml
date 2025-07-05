@@ -62,4 +62,9 @@
         <param name="pwm_channel" value="-1" />
         <param name="flipped" value="false" />
     </node>
+
+    <node pkg="subwoofer" exec="leg" name="leg_1" namespace="/subwoofer/" />
+    <node pkg="subwoofer" exec="leg" name="leg_2" namespace="/subwoofer/" />
+    <node pkg="subwoofer" exec="leg" name="leg_3" namespace="/subwoofer/" />
+    <node pkg="subwoofer" exec="leg" name="leg_4" namespace="/subwoofer/" />
 </launch>
