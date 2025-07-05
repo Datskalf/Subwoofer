@@ -114,13 +114,13 @@ class ServoControl(Node):
         Both the supplied angle and velocity will be capped by the servo limits.
         If no velocity is supplied, the default max velocity is used.
         """
+        self.get_logger().info(
+            f"Received move request angle:{self.aim_angle}, vel:{request.velocity}, curr_vel:{self.current_speed}")
         self.aim_angle = max(min(request.angle, self.max_angle), self.min_angle)
         if request.velocity == 0.0:
             self.current_speed = self.get_parameter("max_velocity").value
         else:
             self.current_speed = max(min(request.velocity, self.get_parameter("max_velocity").value), 0)
-        self.get_logger().info(
-            f"Received move request angle:{self.aim_angle}, vel:{request.velocity}, curr_vel:{self.current_speed}")
         response.is_valid = True
         return response
 
