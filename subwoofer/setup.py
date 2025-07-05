@@ -27,6 +27,7 @@ setup(
     entry_points={
         'console_scripts': [
             "servo = subwoofer.servo_control:main",
+            "leg = subwoofer.leg_control:main",
             "FaceDetection = subwoofer.face_detection:main",
         ],
     },
