@@ -5,7 +5,7 @@
     </material>
 
 
-
+    <!-- Base board -->
     <link name="base_link">
         <visual>
             <origin rpy="0 0 0" xyz="-0.15 -0.15 -0.4" />
@@ -15,6 +15,8 @@
         </visual>
     </link>
 
+
+    <!-- Left and right chassis -->
     <link name="chassis_right">
         <visual>
             <origin rpy="0 -1.57075 0" xyz="0 0 0" />
@@ -46,9 +48,10 @@
     </joint>
 
 
+    <!-- Top and bottom cover -->
     <link name="cover_bottom">
         <visual>
-            <origin rpy="1.57075 0 1.57075" xyz="-1.003 -1.02 1.3" />
+            <origin rpy="1.57075 0 1.57075" xyz="-1.0025 -1.02 1.3" />
             <geometry>
                 <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Bottom.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -57,7 +60,7 @@
     <joint name="cover_bottom_to_base" type="fixed">
         <parent link="base_link"/>
         <child link="cover_bottom"/>
-        <origin xyz="0 0 -0.035"/>
+        <origin xyz="0 0.005 -0.035"/>
     </joint>
 
     <link name="cover_top">
@@ -71,6 +74,95 @@
     <joint name="cover_top_to_base" type="fixed">
         <parent link="base_link"/>
         <child link="cover_top"/>
-        <origin xyz="0 0 0.05"/>
+        <origin xyz="0 0.005 0.0455"/>
+    </joint>
+
+
+    <!-- Front cover -->
+    <link name="front_inner_shoulder">
+        <visual>
+            <origin rpy="1.57075 0 3.1415" xyz="-0.034 0 0.04" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="front_inner_shoulder_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_inner_shoulder"/>
+        <origin xyz="0 0.064 0.0045"/>
+    </joint>
+
+    <link name="front_outer_shoulder">
+        <visual>
+            <origin rpy="0 3.1415 3.1415" xyz="0.117 0 0.47" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="front_outer_shoulder_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_outer_shoulder"/>
+        <origin xyz="-0.233 0.117 0.008"/>
+    </joint>
+
+    <link name="cover_front">
+        <visual>
+            <origin rpy="3.1415 0 1.57075" xyz="0.142 0.355 0.51"/>
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Nose.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="cover_front_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="cover_front"/>
+        <origin xyz="0.0002 0.14 0.004"/>
+    </joint>
+
+
+    <!-- Rear cover -->
+    <link name="back_inner_shoulder">
+        <visual>
+            <origin rpy="1.57075 0 0" xyz="0.036 0 0.04" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="back_inner_shoulder_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_inner_shoulder"/>
+        <origin xyz="0 -0.063 0.0045"/>
+    </joint>
+
+    
+    <link name="back_outer_shoulder">
+        <visual>
+            <origin rpy="0 3.1415 0" xyz="0.117 0 0.47" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="back_outer_shoulder_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_outer_shoulder"/>
+        <origin xyz="0 -0.121 0.008"/>
+    </joint>
+
+    <link name="cover_rear">
+        <visual>
+            <origin rpy="0 1.57075 1.57075" xyz="0.249 0.252 0.38"/>
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="cover_rear_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="cover_rear"/>
+        <origin xyz="0 -0.145 0.0115"/>
     </joint>
 </robot>
