@@ -8,7 +8,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     urdf_tutorial_path = FindPackageShare('subwoofer_model')
-    default_model_path = PathJoinSubstitution(['urdf', 'robot_01.urdf'])
+    default_model_path = PathJoinSubstitution(['urdf', 'subwoofer.urdf'])
     default_rviz_config_path = PathJoinSubstitution([urdf_tutorial_path, 'rviz', 'urdf.rviz'])
 
     # These parameters are maintained for backwards compatibility
