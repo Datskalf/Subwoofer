@@ -35,10 +35,10 @@ class FaceDetection(Node):
         """TODO: Add description."""
         super().__init__("face_detection")
 
-        self.param_cascade_path = self.declare_parameter("cascade_path", None)
-        self.cascade_path = self.get_parameter("cascade_path")
-        if self.cascade_path is None:
-            path = os.path.join(
+        self.param_cascade_path = self.declare_parameter("cascade_path", value="")
+        self.cascade_path = self.get_parameter("cascade_path").value
+        if self.cascade_path == "":
+            self.cascade_path = os.path.join(
                 os.environ["SW_PATH"],
                 "static",
                 "harrcascade_frontalface_default.xml"
