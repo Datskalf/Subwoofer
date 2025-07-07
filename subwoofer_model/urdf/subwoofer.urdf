@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="subwoofer">
+    <material name="yellow">
+        <color rgba="0.96 0.4 0 1"/>
+    </material>
+
+
+
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="-0.15 -0.15 -0.4" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_BasePlate_RPi4.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="chassis_right">
+        <visual>
+            <origin rpy="0 -1.57075 0" xyz="0 0 0" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Right_Side.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+            <material name="yellow"/>
+        </visual>
+    </link>
+    <joint name="chassis_right_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis_right"/>
+        <origin xyz="0.055 0 0.012"/>
+    </joint>
+
+    <link name="chassis_left">
+        <visual>
+            <origin rpy="0 -1.57075 3.1415" xyz="0 0 0" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Left_Side.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+            <material name="yellow"/>
+        </visual>
+    </link>
+    <joint name="chassis_left_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis_left"/>
+        <origin xyz="-0.054 0 0.012"/>
+    </joint>
+
+
+    <link name="cover_bottom">
+        <visual>
+            <origin rpy="1.57075 0 1.57075" xyz="-1.003 -1.02 1.3" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Bottom.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="cover_bottom_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="cover_bottom"/>
+        <origin xyz="0 0 -0.035"/>
+    </joint>
+
+    <link name="cover_top">
+        <visual>
+            <origin rpy="-1.57075 0 -1.57075" xyz="-1.0025 1.011 -1.292" />
+            <geometry>
+                <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Top.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+    </link>
+    <joint name="cover_top_to_base" type="fixed">
+        <parent link="base_link"/>
+        <child link="cover_top"/>
+        <origin xyz="0 0 0.05"/>
+    </joint>
+</robot>
