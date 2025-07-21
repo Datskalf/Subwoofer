@@ -3,7 +3,7 @@
 <package format="3">
   <name>subwoofer_model</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>This package contains a robot model for the microspot robotic dog, named Subwoofer.</description>
   <maintainer email="SondreFlakstad@outlook.com">Sondre Mathias Meiland-Flakstad</maintainer>
   <license>Apache-2.0</license>
 
