@@ -25,4 +25,10 @@
         parent="back_inner_shoulder"
         name="back_right"
         xyz="${37*scale} ${0*scale} ${7*scale}" />
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
 </robot>
