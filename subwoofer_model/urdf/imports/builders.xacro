@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Subwoofer_builders">
 
-    <xacro:include filename="$(find subwoofer_model)/urdf/V2/constants.xacro"/>
+    <xacro:include filename="$(find subwoofer_model)/urdf/imports/constants.xacro"/>
 
     <!-- Link builder -->
     <xacro:macro name="create_link" params="name mesh rpy xyz mass">

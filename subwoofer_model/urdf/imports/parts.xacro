@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Subwoofer_parts">
-    <xacro:include filename="$(find subwoofer_model)/urdf/V2/constants.xacro"/>
+    <xacro:include filename="$(find subwoofer_model)/urdf/imports/constants.xacro"/>
     <xacro:property name="parts_location" value="package://subwoofer_model/meshes"/>
 
 
