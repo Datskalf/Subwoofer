@@ -7,22 +7,24 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     ld = LaunchDescription()
 
-    urdf_tutorial_path = FindPackageShare('subwoofer_model')
-    default_model_path = PathJoinSubstitution(['urdf', 'subwoofer.xacro'])
-    default_rviz_config_path = PathJoinSubstitution([urdf_tutorial_path, 'rviz', 'urdf.rviz'])
-
-    # These parameters are maintained for backwards compatibility
-    gui_arg = DeclareLaunchArgument(name='gui', default_value='true', choices=['true', 'false'],
+    # Should the joint state publisher be ran?
+    gui_arg = DeclareLaunchArgument(name='gui',
+                                    default_value='true',
+                                    choices=['true', 'false'],
                                     description='Flag to enable joint_state_publisher_gui')
     ld.add_action(gui_arg)
-    rviz_arg = DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
+
+    # Which RViz2 config should be used.
+    rviz_arg = DeclareLaunchArgument(name='rvizconfig',
+                                     default_value=PathJoinSubstitution([FindPackageShare('subwoofer_model'), 'rviz', 'urdf.rviz']),
                                      description='Absolute path to rviz config file')
     ld.add_action(rviz_arg)
 
-    # This parameter has changed its meaning slightly from previous versions
-    ld.add_action(DeclareLaunchArgument(name='model', default_value=default_model_path,
-                                        description='Path to robot urdf file relative to urdf_tutorial package'))
+    # Default model location.
+    ld.add_action(DeclareLaunchArgument(name='model', default_value=PathJoinSubstitution(['urdf', 'subwoofer.xacro']),
+                                        description='Path to robot urdf file relative to package root'))
 
+    # Use the urdf_launch package launch to start the display window.
     ld.add_action(IncludeLaunchDescription(
         PathJoinSubstitution([FindPackageShare('urdf_launch'), 'launch', 'display.launch.py']),
         launch_arguments={
