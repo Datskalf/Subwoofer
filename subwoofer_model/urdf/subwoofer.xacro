@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Subwoofer">
+    <xacro:include filename="$(find subwoofer_model)/urdf/V2/constants.xacro"/>
+    <xacro:include filename="$(find subwoofer_model)/urdf/V2/parts.xacro"/>
+    <xacro:include filename="$(find subwoofer_model)/urdf/V2/builders.xacro"/>
+
+    <xacro:create_body />
+
+    <xacro:create_left_leg
+        parent="front_outer_shoulder"
+        name="leg_1"
+        xyz="${-37*scale} ${0*scale} ${7*scale}" />
+
+    <xacro:create_right_leg
+        parent="front_outer_shoulder"
+        name="leg_2"
+        xyz="${37*scale} ${0*scale} ${7*scale}" />
+
+    <xacro:create_left_leg
+        parent="back_inner_shoulder"
+        name="leg_3"
+        xyz="${-37*scale} ${0*scale} ${7*scale}" />
+
+    <xacro:create_right_leg
+        parent="back_inner_shoulder"
+        name="leg_4"
+        xyz="${37*scale} ${0*scale} ${7*scale}" />
+</robot>
