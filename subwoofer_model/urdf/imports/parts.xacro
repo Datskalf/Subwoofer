@@ -134,7 +134,8 @@
     <xacro:property name="right_midlimb_cover_mass" value="0.02"/>
     
     <!-- Right Wrist -->
-    <xacro:property name="right_wrist_mesh" value="${parts_location}/V1.02_Right_Wrist.stl" />
+    <!--<xacro:property name="right_wrist_mesh" value="${parts_location}/V1.02_Right_Wrist.stl" />-->
+    <xacro:property name="right_wrist_mesh" value="${parts_location}/Right_Wrist.dae" />
     <xacro:property name="right_wrist_xyz" value="${-507*scale} ${235*scale} ${148*scale}"/>
     <xacro:property name="right_wrist_rpy" value="0 1.57075 1.57075"/>
     <xacro:property name="right_wrist_mass" value="0.023"/>

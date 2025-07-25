@@ -18,10 +18,6 @@
                     <mesh filename="${mesh}" scale="${scalar}"/>
                 </geometry>
             </collision>
-            <inertial>
-                <mass value="${mass}"/>
-                <xacro:default_inertia/>
-            </inertial>
         </link>
     </xacro:macro>
 
@@ -46,6 +42,7 @@
             <axis xyz="${axis}"/>
             <limit effort="1000.0" lower="${lower}" upper="${upper}" velocity="${velocity}"/>
             <origin rpy="${rpy}" xyz="${xyz}"/>
+            <dynamics damping="0.05" friction="0.05"/>
         </joint>
     </xacro:macro>
 

@@ -276,6 +276,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-0.78" upper="0.78" velocity="0.5"/>
     <origin rpy="0 0 -1.57075" xyz="-0.037 0.0 0.007"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="front_left_hip">
     <visual>
@@ -324,6 +325,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.5"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="front_left_midlimb">
     <visual>
@@ -395,6 +397,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-2.6" upper="1.1" velocity="0.5"/>
     <origin rpy="0 0 1.57075" xyz="0 0 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="front_left_wrist">
     <visual>
@@ -443,6 +446,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-0.78" upper="0.78" velocity="0.5"/>
     <origin rpy="0 0 -1.57075" xyz="0.037 0.0 0.007"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="front_right_hip">
     <visual>
@@ -491,6 +495,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.5"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="front_right_midlimb">
     <visual>
@@ -562,6 +567,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-1.1" upper="2.6" velocity="0.5"/>
     <origin rpy="0 0 1.57075" xyz="0.0 0.0 0.0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="front_right_wrist">
     <visual>
@@ -610,6 +616,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-0.78" upper="0.78" velocity="0.5"/>
     <origin rpy="0 0 -1.57075" xyz="-0.037 0.0 0.007"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="back_left_hip">
     <visual>
@@ -658,6 +665,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.5"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="back_left_midlimb">
     <visual>
@@ -729,6 +737,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-2.6" upper="1.1" velocity="0.5"/>
     <origin rpy="0 0 1.57075" xyz="0 0 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="back_left_wrist">
     <visual>
@@ -777,6 +786,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-0.78" upper="0.78" velocity="0.5"/>
     <origin rpy="0 0 -1.57075" xyz="0.037 0.0 0.007"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="back_right_hip">
     <visual>
@@ -825,6 +835,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.5"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="back_right_midlimb">
     <visual>
@@ -896,6 +907,7 @@
     <axis xyz="1 0 0"/>
     <limit effort="1000.0" lower="-1.1" upper="2.6" velocity="0.5"/>
     <origin rpy="0 0 1.57075" xyz="0.0 0.0 0.0"/>
+    <dynamics damping="0.05" friction="0.05"/>
   </joint>
   <link name="back_right_wrist">
     <visual>
