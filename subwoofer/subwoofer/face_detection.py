@@ -36,7 +36,7 @@ class FaceDetection(Node):
         super().__init__("face_detection")
 
         self.param_cascade_path = self.declare_parameter("cascade_path", None)
-        self.cascade_path = self.get_parameter("cascade_path")
+        self.cascade_path = self.get_parameter("cascade_path").value
         if self.cascade_path is None:
             path = os.path.join(
                 os.environ["SW_PATH"],
