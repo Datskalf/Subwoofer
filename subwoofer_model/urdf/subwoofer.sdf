@@ -1,16 +1,22 @@
 <sdf version='1.9'>
   <model name='Subwoofer'>
+    <joint name='world_joint' type='fixed'>
+      <pose relative_to='__model__'>0 0 0 0 0 0</pose>
+      <parent>world</parent>
+      <child>base_link</child>
+    </joint>
     <link name='base_link'>
+      <pose relative_to='world_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0 0.003267002518891682 0.007439546599496224 0 0 0</pose>
-        <mass>0.39700000000000002</mass>
+        <pose>-7.885106708985487e-19 -0.0007272727272727292 0.008136363636363638 0 0 0</pose>
+        <mass>0.55000000000000004</mass>
         <inertia>
-          <ixx>0.014181732246851391</ixx>
-          <ixy>6.7762635780344027e-21</ixy>
-          <ixz>-1.058791184067875e-22</ixz>
-          <iyy>0.01121896604911839</iyy>
-          <iyz>6.0277091939546612e-05</iyz>
-          <izz>0.014091070197733001</izz>
+          <ixx>0.014998111363636371</ixx>
+          <ixy>2.8504660752982543e-20</ixy>
+          <ixz>5.964652008574368e-22</ixz>
+          <iyy>0.011427527272727269</iyy>
+          <iyz>5.289545454545456e-05</iyz>
+          <izz>0.015153784090909089</izz>
         </inertia>
       </inertial>
       <collision name='base_link_collision'>
@@ -235,15 +241,15 @@
     <link name='back_left_hip_servo'>
       <pose relative_to='back_left_hip_servo_to_back_inner_shoulder'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.006706849315068494 -0.006164383561643836 -0.002465753424657534 0 0 0</pose>
-        <mass>0.072999999999999995</mass>
+        <pose>0.0136 -0.0125 -0.005 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
-          <ixx>0.0020098321917808222</ixx>
-          <ixy>9.2219178082191774e-06</ixy>
-          <ixz>3.688767123287671e-06</ixz>
-          <iyy>0.0020113896109589038</iyy>
-          <iyz>-3.3904109589041102e-06</iyz>
-          <izz>0.0020185094739726028</izz>
+          <ixx>0.002018125</ixx>
+          <ixy>1.7e-05</ixy>
+          <ixz>6.7999999999999984e-06</ixz>
+          <iyy>0.0020209960000000002</iyy>
+          <iyz>-6.2499999999999986e-06</iyz>
+          <izz>0.0020341209999999998</izz>
         </inertia>
       </inertial>
       <collision name='back_left_hip_servo_collision'>
@@ -306,15 +312,15 @@
     <link name='back_left_midlimb_servo'>
       <pose relative_to='back_left_midlimb_servo_to_back_left_hip'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01384466018381896 -0.006057805351125139 -0.04986407766990291 0 0 0</pose>
-        <mass>0.10299999999999999</mass>
+        <pose>0.02256666664888921 -0.008665899186098157 -0.07133333333333333 0 0 0</pose>
+        <mass>0.14999999999999999</mass>
         <inertia>
-          <ixx>0.0032977811083394881</ixx>
-          <ixy>9.8968664953308411e-06</ixy>
-          <ixz>8.1475825181774556e-05</ixz>
-          <iyy>0.0033448894115547961</iyy>
-          <iyz>-3.5650184491371452e-05</iyz>
-          <izz>0.0030557703257195271</izz>
+          <ixx>0.0033872656691186359</ixx>
+          <ixy>1.4664173577100751e-05</ixy>
+          <ixz>0.0001207316665715573</ixz>
+          <iyy>0.0034815796664739592</iyy>
+          <iyz>-4.6362560645625107e-05</iyz>
+          <izz>0.003105578668925928</izz>
         </inertia>
       </inertial>
       <collision name='back_left_midlimb_servo_collision'>
@@ -395,15 +401,15 @@
     <link name='back_left_wrist_servo'>
       <pose relative_to='back_left_wrist_servo_to_back_left_midlimb'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01562820512820513 0 0 0 0 0</pose>
-        <mass>0.078</mass>
+        <pose>0.0265 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
           <ixx>0.002</ixx>
           <ixy>1.323488980084844e-23</ixy>
           <ixz>0</ixz>
-          <iyy>0.0020455562179487181</iyy>
+          <iyy>0.0020702250000000002</iyy>
           <iyz>0</iyz>
-          <izz>0.0020455562179487181</izz>
+          <izz>0.0020702250000000002</izz>
         </inertia>
       </inertial>
       <collision name='back_left_wrist_servo_collision'>
@@ -466,15 +472,15 @@
     <link name='back_right_hip_servo'>
       <pose relative_to='back_right_hip_servo_to_back_inner_shoulder'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.006706849315068494 0.006164383561643836 -0.002465753424657534 0 0 0</pose>
-        <mass>0.072999999999999995</mass>
+        <pose>0.0136 0.0125 -0.005 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
-          <ixx>0.0020098321917808222</ixx>
-          <ixy>-9.2219178082191774e-06</ixy>
-          <ixz>3.688767123287671e-06</ixz>
-          <iyy>0.0020113896109589038</iyy>
-          <iyz>3.3904109589041102e-06</iyz>
-          <izz>0.0020185094739726028</izz>
+          <ixx>0.002018125</ixx>
+          <ixy>-1.7e-05</ixy>
+          <ixz>6.7999999999999984e-06</ixz>
+          <iyy>0.0020209960000000002</iyy>
+          <iyz>6.2499999999999986e-06</iyz>
+          <izz>0.0020341209999999998</izz>
         </inertia>
       </inertial>
       <collision name='back_right_hip_servo_collision'>
@@ -537,15 +543,15 @@
     <link name='back_right_midlimb_servo'>
       <pose relative_to='back_right_midlimb_servo_to_back_right_hip'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01384466018381896 0.006058699503243793 -0.04986407766990291 0 0 0</pose>
-        <mass>0.10299999999999999</mass>
+        <pose>0.02256666664888921 0.008667434147235179 -0.07133333333333333 0 0 0</pose>
+        <mass>0.14999999999999999</mass>
         <inertia>
-          <ixx>0.0032977823869770181</ixx>
-          <ixy>-9.9009975675302764e-06</ixy>
-          <ixz>8.1475825181774556e-05</ixz>
-          <iyy>0.0033448894115547961</iyy>
-          <iyz>3.5655446576589737e-05</iyz>
-          <izz>0.0030557716043570558</izz>
+          <ixx>0.0033872676645681139</ixx>
+          <ixy>-1.467249306645523e-05</ixy>
+          <ixz>0.0001207316665715573</ixz>
+          <iyy>0.0034815796664739592</iyy>
+          <iyz>4.6370772687708167e-05</iyz>
+          <izz>0.003105580664375406</izz>
         </inertia>
       </inertial>
       <collision name='back_right_midlimb_servo_collision'>
@@ -626,15 +632,15 @@
     <link name='back_right_wrist_servo'>
       <pose relative_to='back_right_wrist_servo_to_back_right_midlimb'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01562820512820513 0 0 0 0 0</pose>
-        <mass>0.078</mass>
+        <pose>0.0265 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
           <ixx>0.002</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0020455562179487181</iyy>
+          <iyy>0.0020702250000000002</iyy>
           <iyz>0</iyz>
-          <izz>0.0020455562179487181</izz>
+          <izz>0.0020702250000000002</izz>
         </inertia>
       </inertial>
       <collision name='back_right_wrist_servo_collision'>
@@ -651,7 +657,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -669,7 +675,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -697,15 +703,15 @@
     <link name='front_left_hip_servo'>
       <pose relative_to='front_left_hip_servo_to_front_outer_shoulder'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.006706849315068494 -0.006164383561643836 -0.002465753424657534 0 0 0</pose>
-        <mass>0.072999999999999995</mass>
+        <pose>0.0136 -0.0125 -0.005 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
-          <ixx>0.0020098321917808222</ixx>
-          <ixy>9.2219178082191774e-06</ixy>
-          <ixz>3.688767123287671e-06</ixz>
-          <iyy>0.0020113896109589038</iyy>
-          <iyz>-3.3904109589041102e-06</iyz>
-          <izz>0.0020185094739726028</izz>
+          <ixx>0.002018125</ixx>
+          <ixy>1.7e-05</ixy>
+          <ixz>6.7999999999999984e-06</ixz>
+          <iyy>0.0020209960000000002</iyy>
+          <iyz>-6.2499999999999986e-06</iyz>
+          <izz>0.0020341209999999998</izz>
         </inertia>
       </inertial>
       <collision name='front_left_hip_servo_collision'>
@@ -768,15 +774,15 @@
     <link name='front_left_midlimb_servo'>
       <pose relative_to='front_left_midlimb_servo_to_front_left_hip'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01384466018381896 -0.006057805351125139 -0.04986407766990291 0 0 0</pose>
-        <mass>0.10299999999999999</mass>
+        <pose>0.02256666664888921 -0.008665899186098157 -0.07133333333333333 0 0 0</pose>
+        <mass>0.14999999999999999</mass>
         <inertia>
-          <ixx>0.0032977811083394881</ixx>
-          <ixy>9.8968664953308411e-06</ixy>
-          <ixz>8.1475825181774556e-05</ixz>
-          <iyy>0.0033448894115547961</iyy>
-          <iyz>-3.5650184491371452e-05</iyz>
-          <izz>0.0030557703257195271</izz>
+          <ixx>0.0033872656691186359</ixx>
+          <ixy>1.4664173577100751e-05</ixy>
+          <ixz>0.0001207316665715573</ixz>
+          <iyy>0.0034815796664739592</iyy>
+          <iyz>-4.6362560645625107e-05</iyz>
+          <izz>0.003105578668925928</izz>
         </inertia>
       </inertial>
       <collision name='front_left_midlimb_servo_collision'>
@@ -857,15 +863,15 @@
     <link name='front_left_wrist_servo'>
       <pose relative_to='front_left_wrist_servo_to_front_left_midlimb'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01562820512820513 0 0 0 0 0</pose>
-        <mass>0.078</mass>
+        <pose>0.0265 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
           <ixx>0.002</ixx>
           <ixy>1.323488980084844e-23</ixy>
           <ixz>0</ixz>
-          <iyy>0.0020455562179487181</iyy>
+          <iyy>0.0020702250000000002</iyy>
           <iyz>0</iyz>
-          <izz>0.0020455562179487181</izz>
+          <izz>0.0020702250000000002</izz>
         </inertia>
       </inertial>
       <collision name='front_left_wrist_servo_collision'>
@@ -928,15 +934,15 @@
     <link name='front_right_hip_servo'>
       <pose relative_to='front_right_hip_servo_to_front_outer_shoulder'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.006706849315068494 0.006164383561643836 -0.002465753424657534 0 0 0</pose>
-        <mass>0.072999999999999995</mass>
+        <pose>0.0136 0.0125 -0.005 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
-          <ixx>0.0020098321917808222</ixx>
-          <ixy>-9.2219178082191774e-06</ixy>
-          <ixz>3.688767123287671e-06</ixz>
-          <iyy>0.0020113896109589038</iyy>
-          <iyz>3.3904109589041102e-06</iyz>
-          <izz>0.0020185094739726028</izz>
+          <ixx>0.002018125</ixx>
+          <ixy>-1.7e-05</ixy>
+          <ixz>6.7999999999999984e-06</ixz>
+          <iyy>0.0020209960000000002</iyy>
+          <iyz>6.2499999999999986e-06</iyz>
+          <izz>0.0020341209999999998</izz>
         </inertia>
       </inertial>
       <collision name='front_right_hip_servo_collision'>
@@ -999,15 +1005,15 @@
     <link name='front_right_midlimb_servo'>
       <pose relative_to='front_right_midlimb_servo_to_front_right_hip'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01384466018381896 0.006058699503243793 -0.04986407766990291 0 0 0</pose>
-        <mass>0.10299999999999999</mass>
+        <pose>0.02256666664888921 0.008667434147235179 -0.07133333333333333 0 0 0</pose>
+        <mass>0.14999999999999999</mass>
         <inertia>
-          <ixx>0.0032977823869770181</ixx>
-          <ixy>-9.9009975675302764e-06</ixy>
-          <ixz>8.1475825181774556e-05</ixz>
-          <iyy>0.0033448894115547961</iyy>
-          <iyz>3.5655446576589737e-05</iyz>
-          <izz>0.0030557716043570558</izz>
+          <ixx>0.0033872676645681139</ixx>
+          <ixy>-1.467249306645523e-05</ixy>
+          <ixz>0.0001207316665715573</ixz>
+          <iyy>0.0034815796664739592</iyy>
+          <iyz>4.6370772687708167e-05</iyz>
+          <izz>0.003105580664375406</izz>
         </inertia>
       </inertial>
       <collision name='front_right_midlimb_servo_collision'>
@@ -1088,15 +1094,15 @@
     <link name='front_right_wrist_servo'>
       <pose relative_to='front_right_wrist_servo_to_front_right_midlimb'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>0.01562820512820513 0 0 0 0 0</pose>
-        <mass>0.078</mass>
+        <pose>0.0265 0 0 0 0 0</pose>
+        <mass>0.10000000000000001</mass>
         <inertia>
           <ixx>0.002</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0020455562179487181</iyy>
+          <iyy>0.0020702250000000002</iyy>
           <iyz>0</iyz>
-          <izz>0.0020455562179487181</izz>
+          <izz>0.0020702250000000002</izz>
         </inertia>
       </inertial>
       <collision name='front_right_wrist_servo_collision'>
@@ -1113,7 +1119,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -1131,14 +1137,11 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </visual>
     </link>
-    <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
-      <robotNamespace>/</robotNamespace>
-    </plugin>
     <frame name='back_outer_shoulder_to_back_inner_shoulder' attached_to='back_inner_shoulder'>
       <pose>0 -0.053 0 0 -0 0</pose>
     </frame>
