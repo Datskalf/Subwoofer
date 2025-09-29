@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Subwoofer_builders">
 
     <xacro:include filename="$(find subwoofer_model)/urdf/imports/constants.xacro"/>
+    <xacro:include filename="$(find subwoofer_model)/urdf/imports/materials.xacro"/>
 
 
 
@@ -17,6 +18,28 @@
                 <geometry>
                     <mesh filename="${mesh}" scale="${scalar}"/>
                 </geometry>
+            </visual>
+            <collision>
+                <origin rpy="${rpy}" xyz="${xyz}"/>
+                <geometry>
+                    <mesh filename="${mesh}" scale="${scalar}"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="create_link_colour" params="name mesh rpy xyz mass colour">
+        <link name="${name}">
+            <inertial>
+                <mass value="0.050"/>
+                <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+            </inertial>
+            <visual>
+                <origin rpy="${rpy}" xyz="${xyz}"/>
+                <geometry>
+                    <mesh filename="${mesh}" scale="${scalar}"/>
+                </geometry>
+                <material name="${colour}"/>
             </visual>
             <collision>
                 <origin rpy="${rpy}" xyz="${xyz}"/>
@@ -55,8 +78,15 @@
 
     <!-- Main body builder -->
     <xacro:macro name="create_body">
+        <link name="base_link"/>
+        <xacro:create_fixed_joint
+            parent="base_link"
+            child="baseplate"
+            rpy="0 0 0"
+            xyz="0 0 0" />
+
         <xacro:create_link
-            name="base_link"
+            name="baseplate"
             mesh="${baseplate_mesh}"
             xyz="${baseplate_xyz}"
             rpy="${baseplate_rpy}"
@@ -69,7 +99,7 @@
             rpy="${front_inner_shoulder_rpy}"
             mass="${front_inner_shoulder_mass}" />
         <xacro:create_fixed_joint
-            parent="base_link"
+            parent="baseplate"
             child="front_inner_shoulder"
             rpy="0 0 0"
             xyz="${0*scale} ${65*scale} ${10*scale}" />
@@ -105,7 +135,7 @@
             rpy="${back_inner_shoulder_rpy}"
             mass="${back_inner_shoulder_mass}" />
         <xacro:create_fixed_joint
-            parent="base_link"
+            parent="baseplate"
             child="back_inner_shoulder"
             rpy="0 0 0"
             xyz="${0*scale} ${-66*scale} ${10*scale}" />
@@ -117,7 +147,7 @@
             rpy="${chassis_bottom_rpy}"
             mass="${chassis_bottom_mass}" />
         <xacro:create_fixed_joint
-            parent="base_link"
+            parent="baseplate"
             child="bottom_chassis"
             rpy="0 0 0"
             xyz="${0*scale} ${0*scale} ${-28*scale}" />

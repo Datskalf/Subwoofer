@@ -8,18 +8,18 @@
     <link name='base_link'>
       <pose relative_to='world_joint'>0 0 0 0 0 0</pose>
       <inertial>
-        <pose>-7.885106708985487e-19 -0.0007272727272727292 0.008136363636363638 0 0 0</pose>
+        <pose>-7.885106708985487e-19 -0.0007272727272727293 0.008136363636363639 0 0 0</pose>
         <mass>0.55000000000000004</mass>
         <inertia>
           <ixx>0.014998111363636371</ixx>
           <ixy>2.8504660752982543e-20</ixy>
-          <ixz>5.964652008574368e-22</ixz>
+          <ixz>5.9646520085743605e-22</ixz>
           <iyy>0.011427527272727269</iyy>
           <iyz>5.289545454545456e-05</iyz>
           <izz>0.015153784090909089</izz>
         </inertia>
       </inertial>
-      <collision name='base_link_collision'>
+      <collision name='base_link_fixed_joint_lump__baseplate_collision'>
         <pose>-0.1506 -0.1519 -0.4 0 0 0</pose>
         <geometry>
           <mesh>
@@ -33,7 +33,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -42,7 +42,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -51,7 +51,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -60,7 +60,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Bottom.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Bottom.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -69,7 +69,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Top.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Top.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -78,7 +78,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -87,7 +87,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -96,7 +96,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Left_Side.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Left_Side.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -105,7 +105,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Nose.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Nose.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -114,11 +114,11 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Right_Side.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Right_Side.dae</uri>
           </mesh>
         </geometry>
       </collision>
-      <visual name='base_link_visual'>
+      <visual name='base_link_fixed_joint_lump__baseplate_visual'>
         <pose>-0.1506 -0.1519 -0.4 0 0 0</pose>
         <geometry>
           <mesh>
@@ -132,7 +132,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -141,7 +141,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -150,7 +150,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -159,7 +159,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Bottom.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Bottom.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -168,7 +168,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Top.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Top.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -177,7 +177,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -186,7 +186,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -195,7 +195,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Left_Side.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Left_Side.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -204,7 +204,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Cover_Nose.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Cover_Nose.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -213,7 +213,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Right_Side.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Chassis_Right_Side.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -257,7 +257,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -266,7 +266,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -275,7 +275,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -284,7 +284,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -328,7 +328,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -337,7 +337,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -346,7 +346,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -355,7 +355,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -364,7 +364,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -373,7 +373,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -417,7 +417,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -426,7 +426,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -435,7 +435,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -444,7 +444,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -488,7 +488,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -497,7 +497,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -506,7 +506,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -515,7 +515,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -559,7 +559,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -568,7 +568,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -577,7 +577,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -586,7 +586,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -595,7 +595,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -604,7 +604,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -648,7 +648,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -657,7 +657,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -666,7 +666,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -675,7 +675,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -719,7 +719,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -728,7 +728,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -737,7 +737,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -746,7 +746,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -790,7 +790,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -799,7 +799,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -808,7 +808,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -817,7 +817,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -826,7 +826,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -835,7 +835,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -879,7 +879,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -888,7 +888,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -897,7 +897,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -906,7 +906,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Left_Wrist.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -950,7 +950,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -959,7 +959,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -968,7 +968,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -977,7 +977,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -1021,7 +1021,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -1030,7 +1030,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -1039,7 +1039,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -1048,7 +1048,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -1057,7 +1057,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -1066,7 +1066,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -1110,7 +1110,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -1119,7 +1119,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </collision>
@@ -1128,7 +1128,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Servo.stl</uri>
+            <uri>model://subwoofer_model/meshes/Servo.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -1137,7 +1137,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://subwoofer_model/meshes/Right_Wrist.dae</uri>
+            <uri>model://subwoofer_model/meshes/V1.02_Right_Wrist.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -1150,10 +1150,10 @@
       <pose>0 -0.079 0 0 -0 0</pose>
     </frame>
     <frame name='rear_chassis' attached_to='rear_chassis_to_back_inner_shoulder'/>
-    <frame name='back_inner_shoulder_to_base_link' attached_to='base_link'>
+    <frame name='back_inner_shoulder_to_baseplate' attached_to='baseplate'>
       <pose>0 -0.066 0.01 0 -0 0</pose>
     </frame>
-    <frame name='back_inner_shoulder' attached_to='back_inner_shoulder_to_base_link'/>
+    <frame name='back_inner_shoulder' attached_to='back_inner_shoulder_to_baseplate'/>
     <frame name='back_left_hip_to_back_left_hip_servo' attached_to='back_left_hip_servo'>
       <pose>0.0272 -0.025 -0.01 0 0 -1.57075</pose>
     </frame>
@@ -1190,10 +1190,10 @@
       <pose>0 0 0.072 0 -0 0</pose>
     </frame>
     <frame name='top_chassis' attached_to='top_chassis_to_bottom_chassis'/>
-    <frame name='bottom_chassis_to_base_link' attached_to='base_link'>
+    <frame name='bottom_chassis_to_baseplate' attached_to='baseplate'>
       <pose>0 0 -0.028 0 -0 0</pose>
     </frame>
-    <frame name='bottom_chassis' attached_to='bottom_chassis_to_base_link'/>
+    <frame name='bottom_chassis' attached_to='bottom_chassis_to_baseplate'/>
     <frame name='front_outer_shoulder_to_front_inner_shoulder' attached_to='front_inner_shoulder'>
       <pose>0 0.054 0 0 -0 0</pose>
     </frame>
@@ -1242,9 +1242,13 @@
       <pose>0.054 -0.0655 0.0005 0 -1.57075 0</pose>
     </frame>
     <frame name='right_chassis' attached_to='right_chassis_to_front_inner_shoulder'/>
-    <frame name='front_inner_shoulder_to_base_link' attached_to='base_link'>
+    <frame name='front_inner_shoulder_to_baseplate' attached_to='baseplate'>
       <pose>0 0.065 0.01 0 -0 0</pose>
     </frame>
-    <frame name='front_inner_shoulder' attached_to='front_inner_shoulder_to_base_link'/>
+    <frame name='front_inner_shoulder' attached_to='front_inner_shoulder_to_baseplate'/>
+    <frame name='baseplate_to_base_link' attached_to='base_link'>
+      <pose>0 0 0 0 -0 0</pose>
+    </frame>
+    <frame name='baseplate' attached_to='baseplate_to_base_link'/>
   </model>
 </sdf>

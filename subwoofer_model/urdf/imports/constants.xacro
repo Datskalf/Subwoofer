@@ -7,4 +7,9 @@
         <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
     </xacro:macro>
 
+
+    <!-- Colour codes -->
+    <!-- Supernova: 1.0 0.793 0.0 -->
+    <!-- Port Gore: 0.141 0.152 0.328 -->
+
 </robot>

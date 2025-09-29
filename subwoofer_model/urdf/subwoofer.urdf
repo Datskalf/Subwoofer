@@ -4,12 +4,39 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="Subwoofer">
+  <!-- Colour codes -->
+  <!-- Supernova: 1.0 0.793 0.0 -->
+  <!-- Port Gore: 0.141 0.152 0.328 -->
+  <!-- Colour codes -->
+  <!-- Supernova: 1.0 0.793 0.0 -->
+  <!-- Port Gore: 0.141 0.152 0.328 -->
+  <!-- Colour codes -->
+  <!-- Supernova: 1.0 0.793 0.0 -->
+  <!-- Port Gore: 0.141 0.152 0.328 -->
+  <!-- Colour codes -->
+  <!-- Supernova: 1.0 0.793 0.0 -->
+  <!-- Port Gore: 0.141 0.152 0.328 -->
+  <material name="BLACK">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="RED">
+    <color rgba="1.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="WHITE">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
   <link name="world"/>
   <joint name="world_joint" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
   </joint>
-  <link name="base_link">
+  <link name="base_link"/>
+  <joint name="baseplate_to_base_link" type="fixed">
+    <parent link="base_link"/>
+    <child link="baseplate"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <link name="baseplate">
     <inertial>
       <mass value="0.050"/>
       <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
@@ -35,18 +62,18 @@
     <visual>
       <origin rpy="1.57075 0 3.1415" xyz="-0.034 -0.002 0.033"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="1.57075 0 3.1415" xyz="-0.034 -0.002 0.033"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Inner_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <joint name="front_inner_shoulder_to_base_link" type="fixed">
-    <parent link="base_link"/>
+  <joint name="front_inner_shoulder_to_baseplate" type="fixed">
+    <parent link="baseplate"/>
     <child link="front_inner_shoulder"/>
     <origin rpy="0 0 0" xyz="0.0 0.065 0.01"/>
   </joint>
@@ -58,13 +85,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Left_Side.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Left_Side.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Left_Side.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Left_Side.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -81,13 +108,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Right_Side.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Right_Side.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Right_Side.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Chassis_Right_Side.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -104,18 +131,18 @@
     <visual>
       <origin rpy="3.1415 0 0" xyz="-0.116 0.002 0.467"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="3.1415 0 0" xyz="-0.116 0.002 0.467"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Inner_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <joint name="back_inner_shoulder_to_base_link" type="fixed">
-    <parent link="base_link"/>
+  <joint name="back_inner_shoulder_to_baseplate" type="fixed">
+    <parent link="baseplate"/>
     <child link="back_inner_shoulder"/>
     <origin rpy="0 0 0" xyz="0.0 -0.066 0.01"/>
   </joint>
@@ -127,18 +154,18 @@
     <visual>
       <origin rpy="1.57075 0 -1.57075" xyz="1.004 1.0150000000000001 1.292"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Bottom.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Bottom.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="1.57075 0 -1.57075" xyz="1.004 1.0150000000000001 1.292"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Bottom.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Bottom.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
-  <joint name="bottom_chassis_to_base_link" type="fixed">
-    <parent link="base_link"/>
+  <joint name="bottom_chassis_to_baseplate" type="fixed">
+    <parent link="baseplate"/>
     <child link="bottom_chassis"/>
     <origin rpy="0 0 0" xyz="0.0 0.0 -0.028"/>
   </joint>
@@ -150,13 +177,13 @@
     <visual>
       <origin rpy="-1.57075 0 1.57075" xyz="1.004 -1.016 -1.292"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Top.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Top.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="-1.57075 0 1.57075" xyz="1.004 -1.016 -1.292"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Top.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Top.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -173,13 +200,13 @@
     <visual>
       <origin rpy="0 3.1415 3.1415" xyz="-0.1155 0.002 0.467"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 3.1415" xyz="-0.1155 0.002 0.467"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Front_Outer_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -196,13 +223,13 @@
     <visual>
       <origin rpy="3.1415 0 1.57075" xyz="0.14200000000000002 0.355 0.51"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Nose.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Nose.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="3.1415 0 1.57075" xyz="0.14200000000000002 0.355 0.51"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Nose.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Nose.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -219,13 +246,13 @@
     <visual>
       <origin rpy="0 0 3.1415" xyz="0.117 0.055 -0.47000000000000003"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 3.1415" xyz="0.117 0.055 -0.47000000000000003"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Rear_Outer_Shoulder.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -242,13 +269,13 @@
     <visual>
       <origin rpy="0 1.57075 1.57075" xyz="0.2487 0.252 0.38"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 1.57075 1.57075" xyz="0.2487 0.252 0.38"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Cover_Rear_Plain.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -265,13 +292,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -291,13 +318,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.003 -0.023 -0.026000000000000002"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.003 -0.023 -0.026000000000000002"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -314,13 +341,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -340,13 +367,13 @@
     <visual>
       <origin rpy="0 3.1415 0" xyz="-0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 0" xyz="-0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -363,13 +390,13 @@
     <visual>
       <origin rpy="0 3.1415 0" xyz="0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 0" xyz="0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -386,13 +413,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -412,13 +439,13 @@
     <visual>
       <origin rpy="0 1.57075 -1.57075" xyz="0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 1.57075 -1.57075" xyz="0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -435,13 +462,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -461,13 +488,13 @@
     <visual>
       <origin rpy="3.1415 0 0" xyz="-0.12 0.10300000000000001 0.0282"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="3.1415 0 0" xyz="-0.12 0.10300000000000001 0.0282"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -484,13 +511,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -510,13 +537,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -533,13 +560,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -556,13 +583,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -582,13 +609,13 @@
     <visual>
       <origin rpy="0 1.57075 1.57075" xyz="-0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Right_Wrist.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 1.57075 1.57075" xyz="-0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Right_Wrist.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -605,13 +632,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -631,13 +658,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.003 -0.023 -0.026000000000000002"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.003 -0.023 -0.026000000000000002"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -654,13 +681,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -680,13 +707,13 @@
     <visual>
       <origin rpy="0 3.1415 0" xyz="-0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 0" xyz="-0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -703,13 +730,13 @@
     <visual>
       <origin rpy="0 3.1415 0" xyz="0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 0" xyz="0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -726,13 +753,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -752,13 +779,13 @@
     <visual>
       <origin rpy="0 1.57075 -1.57075" xyz="0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 1.57075 -1.57075" xyz="0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Left_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -775,13 +802,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -801,13 +828,13 @@
     <visual>
       <origin rpy="3.1415 0 0" xyz="-0.12 0.10300000000000001 0.0282"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="3.1415 0 0" xyz="-0.12 0.10300000000000001 0.0282"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Hind_Limb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -824,13 +851,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -850,13 +877,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0.048 -0.02 0.8250000000000001"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -873,13 +900,13 @@
     <visual>
       <origin rpy="0 0 0" xyz="-0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="-0.256 -0.11 0.926"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_MidLimb_Cover.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -896,13 +923,13 @@
     <visual>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 3.1415 1.57075" xyz="0.043000000000000003 0.0 -0.01"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Servo.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/Servo.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -922,13 +949,13 @@
     <visual>
       <origin rpy="0 1.57075 1.57075" xyz="-0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Right_Wrist.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 1.57075 1.57075" xyz="-0.507 0.23500000000000001 0.148"/>
       <geometry>
-        <mesh filename="package://subwoofer_model/meshes/Right_Wrist.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="package://subwoofer_model/meshes/V1.02_Right_Wrist.dae" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>

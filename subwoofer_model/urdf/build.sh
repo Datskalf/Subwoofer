@@ -1,2 +1,2 @@
-xacro subwoofer.xacro -o subwoofer.urdf
+xacro subwoofer.urdf.xacro -o subwoofer.urdf
 ign sdf -p subwoofer.urdf > subwoofer.sdf

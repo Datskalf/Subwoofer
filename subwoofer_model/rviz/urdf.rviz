@@ -8,7 +8,7 @@ Visualization Manager:
     - Class: rviz_default_plugins/Grid
       Name: Grid
       Value: true
-    - Alpha: 0.8
+    - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Description Topic:
         Value: /robot_description
@@ -16,7 +16,7 @@ Visualization Manager:
       Value: true
     - Class: rviz_default_plugins/TF
       Name: TF
-      Value: true
+      Value: false
       Marker Scale: 0.1
   Global Options:
     Fixed Frame: base_link
