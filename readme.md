@@ -14,7 +14,7 @@ The ros2 workspace is located in the ubuntu home directory.
 ### Installation
 1. Create a ROS2 Humble workspace.
 2. Clone this git repository into the `src` directory.
-3. Build the `subwoofer_interfaces` package.
+3. Build and source the `subwoofer_interfaces` package.
 4. Build the remaining packages.
 
 ### Face detection setup
@@ -37,3 +37,11 @@ In `face_detection_launch.xml`, make sure the cascade file is properly linked fo
 | Back Right  | Hip   | 06 | 110      |
 | Back Right  | Upper | 12 | 179      |
 | Back Right  | Lower | 14 | 110      |
+
+
+
+
+## Robot model
+The robot model meshes are borrowed from the microspot project, and recoloured to match the team's printed version.
+A license for the original files can be found in `subwoofer_model/meshes`.
+
