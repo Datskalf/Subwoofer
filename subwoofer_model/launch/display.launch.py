@@ -21,7 +21,7 @@ def generate_launch_description():
     ld.add_action(rviz_arg)
 
     # Default model location.
-    ld.add_action(DeclareLaunchArgument(name='model', default_value=PathJoinSubstitution(['urdf', 'subwoofer.xacro']),
+    ld.add_action(DeclareLaunchArgument(name='model', default_value=PathJoinSubstitution(['urdf', 'subwoofer.urdf']),
                                         description='Path to robot urdf file relative to package root'))
 
     # Use the urdf_launch package launch to start the display window.
