@@ -134,7 +134,7 @@ class ServoControl(Node):
         if self.is_flipped:
             duty_cycle = self.max_duty_cycle - duty_cycle
         msg = Float32()
-        msg.data = duty_cycle
+        msg.data = float(duty_cycle)
         self.pub_servo_duty_cycle.publish(msg)
 
         if not self.simulated:
@@ -142,14 +142,14 @@ class ServoControl(Node):
 
         self.current_angle = angle
 
-    def _angle_to_duty_cycle(self, angle: int) -> float|int:
+    def _angle_to_duty_cycle(self, angle: int) -> int:
         """Convert an angle to its respective duty cycle."""
         angle_offset_from_min = angle - self.min_angle
         
         duty_cycle_per_degree = (self.max_duty_cycle-self.min_duty_cycle)/(self.max_angle-self.min_angle)
         duty_cycle_offset = angle_offset_from_min * duty_cycle_per_degree
         
-        return duty_cycle_offset + self.min_duty_cycle
+        return int(duty_cycle_offset + self.min_duty_cycle)
     
     def _duty_cycle_to_angle(self, duty_cycle: int) -> float|int:
         """Convert a duty cycle to its respective angle."""
