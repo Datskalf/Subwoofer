@@ -1,91 +1,59 @@
-# Copyright 2023 Clearpath Robotics, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# @author Roni Kreinin (rkreinin@clearpathrobotics.com)
-
-import os
+# ROS2 Launch file that converts xacro -> urdf, and spawns urdf into sdf world
 
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
+from launch.substitutions import LaunchConfiguration
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 
-
-ARGUMENTS = [
-    DeclareLaunchArgument('use_sim_time', default_value='true',
-                          choices=['true', 'false'],
-                          description='use_sim_time'),
-    DeclareLaunchArgument('world', default_value='empty',
-                          description='Gazebo World'),
-]
-
+import xacro
+import os.path
 
 def generate_launch_description():
 
-    # Directories
-    pkg_robot = get_package_share_directory(
-        'subwoofer_model')
-    pkg_ros_gz_sim = get_package_share_directory(
-        'ros_gz_sim')
+    use_sim_time = LaunchConfiguration("use_sim_time", default=True)
+    arg1 = 1
+    arg2 = 2
+    
+    description_path = os.path.join(get_package_share_directory("subwoofer_model"))
 
-    # Determine all ros packages that are sourced
-    packages_paths = [os.path.join(p, 'share') for p in os.getenv('AMENT_PREFIX_PATH').split(':')]
+    xacro_file = os.path.join(description_path, "urdf", "subwoofer.urdf.xacro")
 
-    # Set ignition resource path to include all sourced ros packages
-    gz_sim_resource_path = SetEnvironmentVariable(
-        name='IGN_GAZEBO_RESOURCE_PATH',
-        value=[
-            os.path.join(pkg_robot, 'models'), ':',
-            os.path.join(pkg_robot, 'worlds'),
-            ':' + ':'.join(packages_paths)
-        ])
+    doc = xacro.parse(open(xacro_file))
+    xacro.process_doc(doc,  mappings={"arg1": arg1, "arg2": arg2})
 
-    # Paths
-    gz_sim_launch = PathJoinSubstitution(
-        [pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py'])
-
-    gui_config = PathJoinSubstitution(
-        [pkg_robot, 'config', 'gui.config'])
-
-    # Gazebo Simulator
-    gz_sim = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([gz_sim_launch]),
-        launch_arguments=[
-            ('gz_args', [LaunchConfiguration('world'),
-                         '.sdf',
-                         ' -v 4',
-                         ' --gui-config ',
-                         gui_config])
-        ]
+    ignition_spawn_entity = Node(
+        package="ros_ign_gazebo",
+        executable="create",
+        output="screen",
+        arguments=["-string", doc.toxml(), "-name", "subwoofer_model", "-allow_renaming", "true"],
     )
 
-    # Clock bridge
-    clock_bridge = Node(package='ros_gz_bridge',
-                        executable='parameter_bridge',
-                        name='clock_bridge',
-                        output='screen',
-                        arguments=[
-                          '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock'
-                        ])
 
-    # Create launch description and add actions
-    ld = LaunchDescription(ARGUMENTS)
-    ld.add_action(gz_sim_resource_path)
-    ld.add_action(gz_sim)
-    ld.add_action(clock_bridge)
-    return ld
+    return LaunchDescription(
+        [
+            # Launch gazebo environment
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    [
+                        os.path.join(
+                            get_package_share_directory("ros_ign_gazebo"),
+                            "launch",
+                            "ign_gazebo.launch.py",
+                        )
+                    ]
+                ),
+                launch_arguments=[("ign_args", [" -v 5 subwoofer_empty.sdf"])],
+            ),
+            ignition_spawn_entity,
+            
+            # Launch Arguments
+            DeclareLaunchArgument(
+                "use_sim_time",
+                default_value=use_sim_time,
+                description="If true, use simulated clock",
+            ),
+        ]
+    )
