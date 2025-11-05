@@ -1,1 +1,1 @@
-xacro subwoofer.urdf.xacro -o subwoofer.urdf
+xacro ./subwoofer.urdf.xacro -o ./subwoofer.urdf
