@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Subwoofer_parts">
     <xacro:include filename="$(find subwoofer_model)/urdf/imports/constants.xacro"/>
-    <xacro:property name="parts_location" value="package://subwoofer_model/meshes"/>
+    <xacro:property name="parts_location" value="file://$(find subwoofer_model)/meshes"/>
 
 
     
@@ -138,4 +138,5 @@
     <xacro:property name="right_wrist_xyz" value="${-507*scale} ${235*scale} ${148*scale}"/>
     <xacro:property name="right_wrist_rpy" value="0 1.57075 1.57075"/>
     <xacro:property name="right_wrist_mass" value="0.023"/>
+    
 </robot>
